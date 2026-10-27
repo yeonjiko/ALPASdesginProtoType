@@ -119,37 +119,44 @@
   font-size: 14px;
   line-height: 16px;
 }
-.panel_autocomplete_paper:global(.option_a) :global(.MuiAutocomplete-option):hover,
-.panel_autocomplete_paper:global(.option_a) :global(.MuiAutocomplete-option):global(.Mui-focused),
-.panel_autocomplete_paper:global(.option_a)
+.panel_autocomplete_paper:global(.option_a) {
+  --autocomplete-option-hover: #eff6ff;
+  --autocomplete-option-selected: #bfdbfe;
+}
+.panel_autocomplete_paper:global(.option_b) {
+  --autocomplete-option-hover: #fff7ed;
+  --autocomplete-option-selected: #fed7aa;
+}
+.panel_autocomplete_paper:global(.MuiAutocomplete-paper)
+  :global(.MuiAutocomplete-listbox)
+  :global(.MuiAutocomplete-option):hover,
+.panel_autocomplete_paper:global(.MuiAutocomplete-paper)
+  :global(.MuiAutocomplete-listbox)
+  :global(.MuiAutocomplete-option):global(.Mui-focused),
+.panel_autocomplete_paper:global(.MuiAutocomplete-paper)
+  :global(.MuiAutocomplete-listbox)
   :global(.MuiAutocomplete-option):global(.Mui-focusVisible),
-.panel_autocomplete_paper:global(.option_a) :global(.MuiAutocomplete-option)[data-focus="true"] {
-  background: #eff6ff;
+.panel_autocomplete_paper:global(.MuiAutocomplete-paper)
+  :global(.MuiAutocomplete-listbox)
+  :global(.MuiAutocomplete-option)[data-focus="true"] {
+  background-color: var(--autocomplete-option-hover, #eff6ff);
 }
-.panel_autocomplete_paper:global(.option_a) :global(.MuiAutocomplete-option)[aria-selected="true"],
-.panel_autocomplete_paper:global(.option_a)
+.panel_autocomplete_paper:global(.MuiAutocomplete-paper)
+  :global(.MuiAutocomplete-listbox)
+  :global(.MuiAutocomplete-option)[aria-selected="true"],
+.panel_autocomplete_paper:global(.MuiAutocomplete-paper)
+  :global(.MuiAutocomplete-listbox)
   :global(.MuiAutocomplete-option)[aria-selected="true"]:hover,
-.panel_autocomplete_paper:global(.option_a)
+.panel_autocomplete_paper:global(.MuiAutocomplete-paper)
+  :global(.MuiAutocomplete-listbox)
   :global(.MuiAutocomplete-option)[aria-selected="true"]:global(.Mui-focused),
-.panel_autocomplete_paper:global(.option_a)
-  :global(.MuiAutocomplete-option)[aria-selected="true"]:global(.Mui-focusVisible) {
-  background: #bfdbfe;
-}
-.panel_autocomplete_paper:global(.option_b) :global(.MuiAutocomplete-option):hover,
-.panel_autocomplete_paper:global(.option_b) :global(.MuiAutocomplete-option):global(.Mui-focused),
-.panel_autocomplete_paper:global(.option_b)
-  :global(.MuiAutocomplete-option):global(.Mui-focusVisible),
-.panel_autocomplete_paper:global(.option_b) :global(.MuiAutocomplete-option)[data-focus="true"] {
-  background: #fff7ed;
-}
-.panel_autocomplete_paper:global(.option_b) :global(.MuiAutocomplete-option)[aria-selected="true"],
-.panel_autocomplete_paper:global(.option_b)
-  :global(.MuiAutocomplete-option)[aria-selected="true"]:hover,
-.panel_autocomplete_paper:global(.option_b)
-  :global(.MuiAutocomplete-option)[aria-selected="true"]:global(.Mui-focused),
-.panel_autocomplete_paper:global(.option_b)
-  :global(.MuiAutocomplete-option)[aria-selected="true"]:global(.Mui-focusVisible) {
-  background: #fed7aa;
+.panel_autocomplete_paper:global(.MuiAutocomplete-paper)
+  :global(.MuiAutocomplete-listbox)
+  :global(.MuiAutocomplete-option)[aria-selected="true"]:global(.Mui-focusVisible),
+.panel_autocomplete_paper:global(.MuiAutocomplete-paper)
+  :global(.MuiAutocomplete-listbox)
+  :global(.MuiAutocomplete-option)[aria-selected="true"][data-focus="true"] {
+  background-color: var(--autocomplete-option-selected, #bfdbfe);
 }
 
 .root {

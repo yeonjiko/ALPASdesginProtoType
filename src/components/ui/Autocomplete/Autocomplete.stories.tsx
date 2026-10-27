@@ -1,4 +1,4 @@
-import styles from "./Autocomplete.module.css";
+import styles from "@/components/ui/Autocomplete/Autocomplete.module.css";
 import { useTheme } from "@mui/material";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
@@ -23,7 +23,7 @@ const meta = {
                 className:
                   "panel_autocomplete_paper " +
                   styles["panel_autocomplete_paper"] +
-                  " option-" +
+                  " option_" +
                   option,
               },
             },
