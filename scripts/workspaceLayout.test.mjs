@@ -28,12 +28,12 @@ test("default loan rows match the reference and each reset gets an independent l
   const rows = defaultLoanRows();
   assert.deepEqual(rows, {
     lists: [["reservations", "interlibrary"], ["loans"]],
-    activity: [["processed"]],
+    activity: [["searches"], ["processed"]],
   });
   rows.lists[0].pop();
   rows.activity.push(["book"]);
   assert.equal(defaultLoanRows().lists[0].includes("interlibrary"), true);
-  assert.equal(defaultLoanRows().activity.length, 1);
+  assert.equal(defaultLoanRows().activity.length, 2);
 });
 test("each row accepts a third section but rejects a fourth while tabs remain available", () => {
   assert.equal(canSplitLoanRow(2), true);
@@ -53,4 +53,17 @@ test("vertical drops cannot create extra rows or stacked sections", () => {
     assert.equal(canDropInLoanRow(position, 1), false);
     assert.equal(canDropInLoanRow(position, 3, true), false);
   }
+});
+
+test("tab headers accept reordering and cross-row tab joins even at the section limit", () => {
+  for (const kind of ["tab", "header_space"])
+    for (const position of ["left", "right", "center"])
+      assert.equal(canDropInLoanRow(position, 3, false, kind), true);
+});
+
+test("a section leaving another row does not free space in the target row", () => {
+  assert.equal(canDropInLoanRow("right", 3, false, "content"), false);
+  assert.equal(canDropInLoanRow("right", 2, false, "content"), true);
+  assert.equal(canDropInLoanRow("center", 3, false, "content"), true);
+  assert.equal(canDropInLoanRow("center", 0, false, "content"), true);
 });

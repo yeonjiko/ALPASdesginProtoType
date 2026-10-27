@@ -15,6 +15,8 @@ import css from "@/pages/loanReturn/LoanReturnPage.module.css";
 import gridCss from "@/components/ResultsGrid/ResultsGrid.module.css";
 import checkboxCss from "@/components/ui/Checkbox/Checkbox.module.css";
 
+import { useGridContainerReady } from "@/components/ResultsGrid/useGridContainerReady";
+
 const EMPTY_SELECTION: GridRowSelectionModel = { type: "include", ids: new Set() };
 
 type MaterialRow = {
@@ -74,41 +76,44 @@ function LoanGrid<T extends GridValidRowModel>({
   selectable?: boolean;
 }): ReactElement {
   const loan = useLoan();
+  const { gridHostRef, isGridReady } = useGridContainerReady();
   return (
-    <div className={css.grid_host}>
-      <DataGrid<T>
-        className={`alpas_grid ${gridCss.alpas_grid} ${css.list_grid}`}
-        aria-label={label}
-        rows={rows}
-        columns={columns}
-        checkboxSelection={selectable}
-        slotProps={{
-          baseCheckbox: {
-            material: {
-              icon: <span className={checkboxCss.grid_checkbox_icon} />,
+    <div ref={gridHostRef} className={css.grid_host}>
+      {isGridReady && (
+        <DataGrid<T>
+          className={`alpas_grid ${gridCss.alpas_grid} ${css.list_grid}`}
+          aria-label={label}
+          rows={rows}
+          columns={columns}
+          checkboxSelection={selectable}
+          slotProps={{
+            baseCheckbox: {
+              material: {
+                icon: <span className={checkboxCss.grid_checkbox_icon} />,
+              },
             },
-          },
-          rowCheckbox: {
-            material: {
-              icon: <span className={checkboxCss.grid_checkbox_icon} />,
+            rowCheckbox: {
+              material: {
+                icon: <span className={checkboxCss.grid_checkbox_icon} />,
+              },
             },
-          },
-        }}
-        rowSelection={selectable}
-        rowSelectionModel={loan.selections[label] ?? EMPTY_SELECTION}
-        onRowSelectionModelChange={(selection) => loan.setSelection(label, selection)}
-        disableRowSelectionExcludeModel
-        columnHeaderHeight={42}
-        rowHeight={42}
-        disableRowSelectionOnClick
-        hideFooter
-        initialState={{ pagination: { paginationModel: { page: 0, pageSize: -1 } } }}
-        pageSizeOptions={[{ value: -1, label: "전체" }]}
-        localeText={{
-          ...koKR.components.MuiDataGrid.defaultProps.localeText,
-          noRowsLabel: "결과가 없습니다",
-        }}
-      />
+          }}
+          rowSelection={selectable}
+          rowSelectionModel={loan.selections[label] ?? EMPTY_SELECTION}
+          onRowSelectionModelChange={(selection) => loan.setSelection(label, selection)}
+          disableRowSelectionExcludeModel
+          columnHeaderHeight={42}
+          rowHeight={42}
+          disableRowSelectionOnClick
+          hideFooter
+          initialState={{ pagination: { paginationModel: { page: 0, pageSize: -1 } } }}
+          pageSizeOptions={[{ value: -1, label: "전체" }]}
+          localeText={{
+            ...koKR.components.MuiDataGrid.defaultProps.localeText,
+            noRowsLabel: "결과가 없습니다",
+          }}
+        />
+      )}
     </div>
   );
 }
@@ -240,21 +245,17 @@ export function MemberMemo(): ReactElement {
 
 function PanelContent({ kind }: { kind: LoanPanelId }): ReactElement {
   const loan = useLoan();
-  if (kind === "processed" || kind === "searches") {
+  if (kind === "searches") {
     const searches = loan.searches.map((row, index) => ({ ...row, number: index + 1 }));
-    if (kind === "searches")
-      return <LoanGrid label="이용자 검색목록" rows={searches} columns={SEARCH_COLUMNS} />;
+    return <LoanGrid label="이용자 검색목록" rows={searches} columns={SEARCH_COLUMNS} />;
+  }
+  if (kind === "processed") {
     const activity = loan.activity.map((row, index) => ({
       ...row,
       number: index + 1,
       dueDate: "",
     }));
-    return (
-      <div className={css.processing_content}>
-        <LoanGrid label="처리목록 이용자 검색내역" rows={searches} columns={SEARCH_COLUMNS} />
-        <LoanGrid label="처리목록 자료 처리내역" rows={activity} columns={ACTIVITY_COLUMNS} />
-      </div>
-    );
+    return <LoanGrid label="처리목록 자료 처리내역" rows={activity} columns={ACTIVITY_COLUMNS} />;
   }
   if (kind === "book") return <BookInfo />;
   if (kind === "photo")

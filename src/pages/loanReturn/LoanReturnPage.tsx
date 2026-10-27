@@ -13,7 +13,7 @@ import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
 import type { GridRowSelectionModel } from "@mui/x-data-grid";
 import { DockviewReact, themeLight } from "dockview";
-import type { DockviewApi, DockviewDndOverlayEvent, DockviewReadyEvent } from "dockview";
+import type { DockviewApi, DockviewReadyEvent } from "dockview";
 import SettingsOutlined from "@mui/icons-material/SettingsOutlined";
 import { Button, Dialog, IconButton, Select, Tooltip } from "@/components/ui";
 import dockCss from "@/components/dockview/Dockview.module.css";
@@ -22,7 +22,6 @@ import { LoanDockPanel, LoanTab, MemberInfo, MemberMemo } from "@/pages/loanRetu
 import { LoanContext } from "@/pages/loanReturn/loanContext";
 import type { LoanActivity, LoanItem, MemberSearch } from "@/pages/loanReturn/loanContext";
 import {
-  canDropInLoanRow,
   canSplitLoanRow,
   defaultLoanRows,
   isLoanPanelId,
@@ -32,6 +31,7 @@ import {
   saveLoanLayout,
 } from "@/pages/loanReturn/loanLayout";
 import type { LoanHeight, LoanPanelId, LoanRowId } from "@/pages/loanReturn/loanLayout";
+import { allowLoanRowDrop, transferLoanRowPanels } from "@/pages/loanReturn/loanDocking";
 import { useWorkspace } from "@/workspace/workspaceContext";
 import { LOAN_ID } from "@/workspace/workspaceModel";
 import css from "@/pages/loanReturn/LoanReturnPage.module.css";
@@ -45,17 +45,6 @@ function panelTitle(id: LoanPanelId, counts: Record<string, number>): string {
   return id === "loans" || id === "reservations" || id === "interlibrary"
     ? `${title} (${counts[id] ?? 0})`
     : title;
-}
-
-function allowRowDrop(
-  api: DockviewApi,
-  event: Pick<DockviewDndOverlayEvent, "getData" | "position">,
-): boolean {
-  const transfer = event.getData();
-  if (!transfer || transfer.viewId !== api.id) return false;
-  const source = api.groups.find((group) => group.id === transfer.groupId);
-  const releasesSource = !!source && (transfer.panelId === null || source.panels.length === 1);
-  return canDropInLoanRow(event.position, api.groups.length, releasesSource);
 }
 
 function buildDefaultRow(api: DockviewApi, rowId: LoanRowId): void {
@@ -80,6 +69,8 @@ function buildDefaultRow(api: DockviewApi, rowId: LoanRowId): void {
     }
     previous = first;
   }
+  if (rowId === "activity")
+    api.getPanel("searches")?.api.setSize({ width: Math.round(api.width * 0.3) });
   api.getPanel(rowId === "lists" ? "loans" : "processed")?.api.setActive();
 }
 
@@ -103,17 +94,21 @@ export function LoanReturnPage(): ReactElement {
   const [selectedPanel, setSelectedPanel] = useState<LoanPanelId>("book");
   const [selectedRow, setSelectedRow] = useState<LoanRowId>("lists");
   const [placement, setPlacement] = useState("section");
-  const [rows, setRows] = useState<Record<LoanRowId, { sections: number; titles: string[] }>>({
-    lists: { sections: 0, titles: [] },
-    activity: { sections: 0, titles: [] },
+  const [rows, setRows] = useState<
+    Record<LoanRowId, { isReady: boolean; sections: number; titles: string[] }>
+  >({
+    lists: { isReady: false, sections: 0, titles: [] },
+    activity: { isReady: false, sections: 0, titles: [] },
   });
+  const visibleRowCount = ROW_IDS.filter((id) => !rows[id].isReady || rows[id].sections > 0).length;
   const apis = useRef<Record<LoanRowId, DockviewApi | null>>({ lists: null, activity: null });
   const subscriptions = useRef<Array<{ dispose: () => void }>>([]);
   const headingId = useId();
   const settingsId = useId();
   const refreshRows = useCallback(() => {
     const summarize = (id: LoanRowId) => ({
-      sections: apis.current[id]?.groups.length ?? 0,
+      isReady: apis.current[id] !== null,
+      sections: apis.current[id]?.groups.filter((group) => group.panels.length > 0).length ?? 0,
       titles:
         apis.current[id]?.panels.map(
           (panel) => loanPanels.find((definition) => definition.id === panel.id)?.title ?? panel.id,
@@ -240,7 +235,11 @@ export function LoanReturnPage(): ReactElement {
     subscriptions.current.push(
       api.onDidLayoutChange(refreshRows),
       api.onWillShowOverlay((event) => {
-        if (!allowRowDrop(api, event)) event.preventDefault();
+        if (!allowLoanRowDrop(Object.values(apis.current), api, event)) event.preventDefault();
+      }),
+      api.onUnhandledDragOverEvent((event) => {
+        if (allowLoanRowDrop(Object.values(apis.current), api, { ...event, kind: event.target }))
+          event.accept();
       }),
     );
     refreshRows();
@@ -269,6 +268,10 @@ export function LoanReturnPage(): ReactElement {
       return;
     }
     const reference = target.activePanel;
+    const emptyGroup = target.groups.find((group) => group.panels.length === 0);
+    const emptyPosition = emptyGroup
+      ? { referenceGroup: emptyGroup, direction: "within" as const }
+      : undefined;
     if (existing && source === target && reference) {
       const group =
         placement === "tab"
@@ -289,9 +292,11 @@ export function LoanReturnPage(): ReactElement {
         minimumHeight: 0,
         position: reference
           ? { referencePanel: reference, direction: placement === "section" ? "right" : "within" }
-          : undefined,
+          : emptyPosition,
       });
-      if (existing) source?.removePanel(existing);
+      if (existing && source) {
+        source.removePanel(existing);
+      }
     }
     target.getPanel(selectedPanel)?.api.setActive();
     refreshRows();
@@ -303,8 +308,12 @@ export function LoanReturnPage(): ReactElement {
       setNotice("저장한 내부 배치가 없습니다.");
       return;
     }
-    for (const rowId of ROW_IDS)
-      apis.current[rowId]?.fromJSON(saved.rows[rowId], { reuseExistingPanels: true });
+    for (const rowId of ROW_IDS) {
+      const api = apis.current[rowId];
+      if (api) {
+        api.fromJSON(saved.rows[rowId], { reuseExistingPanels: true });
+      }
+    }
     setHeight(saved.height);
     refreshRows();
     setNotice("저장한 내부 배치를 복원했습니다.");
@@ -343,59 +352,73 @@ export function LoanReturnPage(): ReactElement {
             {notice}
           </Alert>
         )}
-        <div className={css.layout}>
-          <section className={css.fixed_row} aria-label="1행 기본 패널">
-            <div className={css.fixed_row_content}>
-              <LoanEntry
-                onScan={scanNumber}
-                onChange={markChanged}
-                onSettings={() => setIsManagerOpen(true)}
-                onRfid={() =>
-                  setNotice(
-                    "RFID 장비는 연결되지 않았습니다. 번호 입력란에서 DEMO-001로 조회를 시연할 수 있습니다.",
-                  )
-                }
-                loanDate={loanDate}
-                returnDate={returnDate}
-                onLoanDateChange={(date) => {
-                  setLoanDate(date);
-                  markChanged();
-                }}
-                onReturnDateChange={(date) => {
-                  setReturnDate(date);
-                  markChanged();
-                }}
-              />
-              <MemberInfo />
-              <MemberMemo />
-            </div>
-          </section>
-          {ROW_IDS.map((rowId) => (
-            <section key={rowId} className={css.dock_row} aria-label={ROW_LABELS[rowId]}>
-              <div className={css.row_dock}>
-                <DockviewReact
-                  className={dockCss.dockview}
-                  theme={themeLight}
-                  components={DOCK_COMPONENTS}
-                  defaultTabComponent={LoanTab}
-                  defaultRenderer="onlyWhenVisible"
-                  disableFloatingGroups
-                  dndEdges={false}
-                  onReady={(event) => handleReady(rowId, event)}
-                  onWillDrop={(event) => {
-                    const api = apis.current[rowId];
-                    if (!api || !allowRowDrop(api, event)) {
-                      event.preventDefault();
-                      setNotice(
-                        "행 안에서 최대 3개 섹션까지 좌우 도킹할 수 있습니다. 행 이동은 설정에서 선택하세요.",
-                      );
-                    }
+        <section className={css.layout_scroll} aria-label="대출·반납 패널 내용" tabIndex={0}>
+          <div className={css.layout} data-visible-rows={visibleRowCount}>
+            <section className={css.fixed_row} aria-label="1행 기본 패널">
+              <div className={css.fixed_row_content}>
+                <LoanEntry
+                  onScan={scanNumber}
+                  onChange={markChanged}
+                  onSettings={() => setIsManagerOpen(true)}
+                  onRfid={() =>
+                    setNotice(
+                      "RFID 장비는 연결되지 않았습니다. 번호 입력란에서 DEMO-001로 조회를 시연할 수 있습니다.",
+                    )
+                  }
+                  loanDate={loanDate}
+                  returnDate={returnDate}
+                  onLoanDateChange={(date) => {
+                    setLoanDate(date);
+                    markChanged();
+                  }}
+                  onReturnDateChange={(date) => {
+                    setReturnDate(date);
+                    markChanged();
                   }}
                 />
+                <MemberInfo />
+                <MemberMemo />
               </div>
             </section>
-          ))}
-        </div>
+            {ROW_IDS.map((rowId) => (
+              <section
+                key={rowId}
+                className={css.dock_row}
+                aria-label={ROW_LABELS[rowId]}
+                hidden={rows[rowId].isReady && rows[rowId].sections === 0}
+              >
+                <div className={css.row_dock}>
+                  <DockviewReact
+                    className={dockCss.dockview}
+                    theme={themeLight}
+                    components={DOCK_COMPONENTS}
+                    defaultTabComponent={LoanTab}
+                    defaultRenderer="onlyWhenVisible"
+                    disableFloatingGroups
+                    dndEdges={false}
+                    onReady={(event) => handleReady(rowId, event)}
+                    onWillDrop={(event) => {
+                      const api = apis.current[rowId];
+                      if (!api || !allowLoanRowDrop(Object.values(apis.current), api, event)) {
+                        event.preventDefault();
+                        setNotice(
+                          "2·3행에서 최대 3개 섹션까지 좌우 도킹하거나 탭으로 합칠 수 있습니다.",
+                        );
+                        return;
+                      }
+                      if (event.getData()?.viewId !== api.id) {
+                        event.preventDefault();
+                        if (!transferLoanRowPanels(Object.values(apis.current), api, event))
+                          setNotice("패널을 이동하지 못했습니다. 기존 배치를 유지합니다.");
+                        refreshRows();
+                      }
+                    }}
+                  />
+                </div>
+              </section>
+            ))}
+          </div>
+        </section>
         <div className={css.page_actions}>
           <Tooltip title="대출·반납 화면 설정">
             <IconButton aria-label="대출·반납 화면 설정" onClick={() => setIsManagerOpen(true)}>
@@ -421,7 +444,9 @@ export function LoanReturnPage(): ReactElement {
             <p>
               각 행은 최대 {MAX_LOAN_ROW_SECTIONS}개 섹션입니다. 첫 행은 번호 입력, 이용자 정보,
               메모/대출건수의 고정 섹션이며, 간략·상세·도서정보는 가운데 섹션에서 탭으로 전환합니다.
-              2·3행은 도킹하거나 같은 섹션에 탭으로 추가할 수 있습니다.
+              2·3행은 탭을 드래그해 좌우 분할하거나 탭으로 합칠 수 있으며, 두 행 사이 이동도
+              가능합니다. 탭이 없는 행은 숨겨집니다. 다시 사용하려면 배치할 행을 선택하고 화면을
+              추가하세요.
             </p>
             <div className={css.row_summary}>
               <div>
@@ -494,7 +519,9 @@ export function LoanReturnPage(): ReactElement {
                   for (const id of ROW_IDS) {
                     const api = apis.current[id];
                     const panel = api?.getPanel(selectedPanel);
-                    if (panel) api?.removePanel(panel);
+                    if (panel && api) {
+                      api.removePanel(panel);
+                    }
                   }
                   refreshRows();
                 }}

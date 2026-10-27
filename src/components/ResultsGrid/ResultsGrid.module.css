@@ -1,6 +1,6 @@
 .grid_infinite_host {
   min-width: 0;
-  min-height: 100px;
+  min-height: 240px;
   flex: 1;
   display: flex;
   flex-direction: column;

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>대출·반납 도킹 회귀 검증</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <aside
+      style="
+        position: fixed;
+        z-index: 2000;
+        top: 8px;
+        right: 8px;
+        background: white;
+        padding: 8px;
+        border: 1px solid #ccc;
+        max-width: 500px;
+      "
+    >
+      <button id="run-docking-test">도킹 회귀 검증 실행</button>
+      <pre
+        id="docking-test-result"
+        aria-live="polite"
+        style="max-height: 160px; overflow: auto; font-size: 11px"
+      ></pre>
+    </aside>
+    <script type="module" src="../../src/main.tsx"></script>
+    <script type="module" src="./loanDocking.mjs"></script>
+  </body>
+</html>

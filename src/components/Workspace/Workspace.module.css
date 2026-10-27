@@ -32,8 +32,8 @@
   white-space: nowrap;
 }
 
-/* Same 24px action and 8px glyph as the built-in tab, with a keyboard-accessible button. */
-.alpas_dockview .workspace_tab :global(.dv-default-tab-action) {
+/* The drag preview is cloned under body, so tab styles must not depend on the workspace. */
+.workspace_tab :global(.dv-default-tab-action) {
   width: 24px;
   height: 24px;
   flex: 0 0 24px;
@@ -46,7 +46,7 @@
   cursor: pointer;
 }
 
-.alpas_dockview :global(.dv-tab.dv-inactive-tab) .workspace_tab :global(.dv-default-tab-action) {
+:global(.dv-tab.dv-inactive-tab) .workspace_tab :global(.dv-default-tab-action) {
   visibility: visible;
 }
 
@@ -105,11 +105,11 @@
   margin-top: 0;
 }
 
-.dockview_shell[data-dockview-style="rounded"] .workspace_tab :global(.dv-svg) {
+.workspace_tab_round :global(.dv-svg) {
   width: 12px;
   height: 12px;
 }
 
-.dockview_shell[data-dockview-style="rounded"] .workspace_tab :global(.dv-default-tab-action) {
+.workspace_tab_round :global(.dv-default-tab-action) {
   border-radius: 4px;
 }

@@ -121,9 +121,12 @@ export function DockPanel({
 }
 
 function WorkspaceTab({ api }: IDockviewPanelHeaderProps): ReactElement {
-  const { requestClose } = useWorkspace();
+  const { requestClose, variant } = useWorkspace();
+  const tabClassName = cx(
+    variant.dockviewStyle === "rounded" ? "workspace_tab workspace_tab_round" : "workspace_tab",
+  );
   return (
-    <div className={`${cx("workspace_tab")} ${dockCss.tab_content} dv-default-tab`}>
+    <div className={`${tabClassName} ${dockCss.tab_content} dv-default-tab`}>
       <span className="dv-default-tab-content">{api.title}</span>
       <button
         type="button"

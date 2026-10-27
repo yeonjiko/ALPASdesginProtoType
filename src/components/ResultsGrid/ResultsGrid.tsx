@@ -18,6 +18,8 @@ import { InfiniteGridFooterContext, ResultsFooter } from "@/components/ResultsGr
 import type { GridSettingsDialogValue } from "@/components/GridSettingsDialog/GridSettingsDialog";
 import { GridSettingsDialog } from "@/components/GridSettingsDialog/GridSettingsDialog";
 
+import { useGridContainerReady } from "@/components/ResultsGrid/useGridContainerReady";
+
 const cx = createClasses(css0, css1);
 
 export function ResultsGrid({ variant }: { variant: LayoutVariant }): ReactElement {
@@ -38,7 +40,7 @@ function ResultsGridContent({ variant }: { variant: LayoutVariant }): ReactEleme
     });
   const [isSettingsOpen, setIsSettingsOpen] = React.useState(false);
   const [loadedCount, setLoadedCount] = React.useState(() => Math.min(25, totalCount));
-  const gridHostRef = React.useRef<HTMLDivElement>(null);
+  const { gridHostRef, isGridReady } = useGridContainerReady();
 
   React.useEffect(() => {
     const scroller = gridHostRef.current?.querySelector<HTMLElement>(
@@ -59,7 +61,7 @@ function ResultsGridContent({ variant }: { variant: LayoutVariant }): ReactEleme
       window.cancelAnimationFrame(frame);
       scroller.removeEventListener("scroll", loadNextBatch);
     };
-  }, [batchSize, loadedCount, totalCount]);
+  }, [batchSize, gridHostRef, isGridReady, loadedCount, totalCount]);
 
   const setBatchSize = React.useCallback(
     (value: number) => {
@@ -113,40 +115,42 @@ function ResultsGridContent({ variant }: { variant: LayoutVariant }): ReactEleme
         data-infinite-scroll="true"
         data-batch-size={batchSize}
       >
-        <DataGrid
-          className={cx("alpas_grid")}
-          aria-label="대출 자료 검색 결과"
-          rows={allRows.slice(0, loadedCount)}
-          columns={gridColumns}
-          columnVisibilityModel={columnVisibilityModel}
-          columnHeaderHeight={42}
-          rowHeight={rowHeight}
-          style={customStyle}
-          checkboxSelection
-          disableRowSelectionOnClick
-          initialState={{
-            pagination: { paginationModel: { page: 0, pageSize: -1 } },
-          }}
-          pageSizeOptions={[{ value: -1, label: "전체" }]}
-          localeText={{
-            ...koKR.components.MuiDataGrid.defaultProps.localeText,
-            noRowsLabel: "결과가 없습니다",
-          }}
-          slots={{ footer: ResultsFooter }}
-          slotProps={{
-            baseCheckbox: {
-              material: {
-                icon: <span className={cx("grid_checkbox_icon")} />,
+        {isGridReady && (
+          <DataGrid
+            className={cx("alpas_grid")}
+            aria-label="대출 자료 검색 결과"
+            rows={allRows.slice(0, loadedCount)}
+            columns={gridColumns}
+            columnVisibilityModel={columnVisibilityModel}
+            columnHeaderHeight={42}
+            rowHeight={rowHeight}
+            style={customStyle}
+            checkboxSelection
+            disableRowSelectionOnClick
+            initialState={{
+              pagination: { paginationModel: { page: 0, pageSize: -1 } },
+            }}
+            pageSizeOptions={[{ value: -1, label: "전체" }]}
+            localeText={{
+              ...koKR.components.MuiDataGrid.defaultProps.localeText,
+              noRowsLabel: "결과가 없습니다",
+            }}
+            slots={{ footer: ResultsFooter }}
+            slotProps={{
+              baseCheckbox: {
+                material: {
+                  icon: <span className={cx("grid_checkbox_icon")} />,
+                },
               },
-            },
-            rowCheckbox: {
-              material: {
-                icon: <span className={cx("grid_checkbox_icon")} />,
+              rowCheckbox: {
+                material: {
+                  icon: <span className={cx("grid_checkbox_icon")} />,
+                },
               },
-            },
-            noRowsOverlay: { className: cx("alpas_empty") },
-          }}
-        />
+              noRowsOverlay: { className: cx("alpas_empty") },
+            }}
+          />
+        )}
       </div>
       <GridSettingsDialog
         open={isSettingsOpen}

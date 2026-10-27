@@ -33,7 +33,7 @@ export function isLoanPanelId(value: string): value is LoanPanelId {
 export function defaultLoanRows(): Record<LoanRowId, LoanPanelId[][]> {
   return {
     lists: [["reservations", "interlibrary"], ["loans"]],
-    activity: [["processed"]],
+    activity: [["searches"], ["processed"]],
   };
 }
 
@@ -45,7 +45,9 @@ export function canDropInLoanRow(
   position: string,
   groupCount: number,
   releasesSourceGroup = false,
+  kind: string = "content",
 ): boolean {
+  if (kind === "tab" || kind === "header_space") return true;
   if (position === "center") return true;
   if (position !== "left" && position !== "right") return false;
   return canSplitLoanRow(groupCount, releasesSourceGroup);
