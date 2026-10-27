@@ -1,0 +1,39 @@
+.root {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  min-width: 0;
+  color: var(--work-text, #333);
+  font-family: inherit;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+  vertical-align: top;
+}
+.small {
+  font-size: 12px;
+  line-height: 16px;
+}
+.medium {
+  font-size: 14px;
+  line-height: 20px;
+}
+.large {
+  font-size: 16px;
+  line-height: 24px;
+}
+.error,
+.required_mark {
+  color: #d92d20;
+}
+.disabled,
+.disabled .required_mark {
+  color: #777;
+}
+.sr_only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

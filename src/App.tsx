@@ -1,4 +1,5 @@
 import type { ReactElement } from "react";
+import type { TaskRequest } from "@/workspace/workspaceModel";
 import { Button } from "@/components/ui";
 import { createClasses } from "@/styles/classes";
 import css0 from "@/App.module.css";
@@ -18,14 +19,22 @@ const cx = createClasses(css0, css1);
 export function App(): ReactElement | null {
   const [selected, setSelected] = React.useState(0);
   const [sidebarMode, setSidebarMode] = React.useState<SidebarMode>("normal");
+  const [taskRequest, setTaskRequest] = React.useState<TaskRequest>();
   const variant = variants[selected];
 
   return (
     <AlpasProvider variant={variant}>
       <div className={cx(`app sidebar_${sidebarMode}`)}>
         <Header variant={variant} />
-        <Sidebar variant={variant} mode={sidebarMode} onModeChange={setSidebarMode} />
-        <Workspace variant={variant} />
+        <Sidebar
+          variant={variant}
+          mode={sidebarMode}
+          onModeChange={setSidebarMode}
+          onOpenTask={(title) =>
+            setTaskRequest((current) => ({ title, sequence: (current?.sequence ?? 0) + 1 }))
+          }
+        />
+        <Workspace variant={variant} request={taskRequest} />
         <div className={cx("switcher")}>
           <Typography variant="caption">03Layout 시안 전환</Typography>
           <Stack direction="row" spacing={1}>

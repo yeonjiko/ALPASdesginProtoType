@@ -11,6 +11,14 @@
 .root :global(.MuiOutlinedInput-input) {
   padding: 8px 12px;
 }
+.root :global(.MuiOutlinedInput-root.MuiInputBase-multiline) {
+  height: auto;
+  min-height: 36px;
+  padding: 8px 12px;
+}
+.root :global(.MuiInputBase-multiline) :global(textarea.MuiInputBase-input) {
+  padding: 0;
+}
 .root :global(.MuiInputBase-input)::placeholder {
   color: #777;
   opacity: 1;

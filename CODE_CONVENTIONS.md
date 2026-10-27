@@ -34,3 +34,19 @@
 - IntelliJ는 Automatic Prettier configuration과 Run on save를 사용합니다. ESLint도 프로젝트 설정을 자동 탐지합니다.
 - package.json과 .gitignore는 기존 항목을 보존하고 필요한 필드와 규칙만 병합합니다. lockfile을 공유하고 재현 설치에는 npm ci를 사용합니다.
 - ESLint 설정을 다른 프로젝트로 옮길 때는 scripts/eslint/pageImports.mjs도 함께 필요합니다. 테스트 명령을 옮기면 scripts/*.test.mjs와 연결된 모델도 함께 확인해야 합니다.
+
+## EditorConfig 공통 기준
+
+- 들여쓰기, 탭 너비, UTF-8, LF, 마지막 줄바꿈, 후행 공백 제거 및 줄 길이 기준은 루트 .editorconfig에서 관리합니다.
+- Prettier는 .editorconfig에서 indent_style, indent_size/tab_width, end_of_line, max_line_length를 읽습니다. .prettierrc.json에는 쌍따옴표와 세미콜론 등 EditorConfig 공통 속성으로 표현할 수 없는 규칙만 둡니다.
+- max_line_length 100은 Prettier의 줄바꿈 기준이며 긴 URL이나 문자열의 강제 최대 길이가 아닙니다.
+- VS Code는 EditorConfig.EditorConfig 확장을 사용하며 Prettier의 useEditorConfig를 활성화합니다. IntelliJ는 기본 제공 EditorConfig 지원과 프로젝트 Prettier를 사용합니다.
+- EditorConfig는 문법 정렬기나 정적 분석기가 아닙니다. 에디터와 무관한 최종 검증은 npm run check로 실행합니다. TypeScript 검사와 ESLint 규칙은 기존 설정을 유지하며 TSLint를 추가하지 않습니다.
+
+## 검사 도구 호환성과 추가 제약
+
+- 유지보수 중인 ESLint 10과 typescript-eslint recommendedTypeChecked, React Hooks 검사를 유지합니다. ESLint 9 및 ESLint 10 미지원 React·접근성 플러그인은 사용하지 않습니다.
+- React key·네이티브 button type·기본 접근성은 Oxlint 내장 react/jsx-a11y 규칙으로 별도 검사합니다. npm run lint가 ESLint와 Oxlint를 모두 실행하며 두 도구의 경고도 차단합니다. IDE 기본 ESLint 진단에 Oxlint가 자동 포함되는 것은 아닙니다.
+- as any·as unknown as T와 불필요한 타입 단언을 검사하고, TS 오류 억제 설명 및 ESLint disable의 대상 규칙·사유를 요구합니다. 예외 사유와 최소 범위의 타당성은 리뷰합니다.
+- 미처리 Promise는 void를 붙였다는 이유만으로 허용하지 않습니다. 미사용 인자·catch 인자도 검사합니다.
+- 전체 제약 표와 검사 범위는 D:/고연지/9-21-회의후-내용-서치/ALPAS_자동화설정/README.md를 참조합니다. .editorconfig·Prettier·TypeScript의 기존 기준은 유지합니다.

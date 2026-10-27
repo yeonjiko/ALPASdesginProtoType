@@ -32,10 +32,19 @@ export function createAlpasTheme(variant: LayoutVariant): Theme {
       mode: "light",
       primary: { main: variant.accent },
       error: { main: "#D92D20" },
-      text: { primary: "#333", secondary: "#555" },
+      text: {
+        primary: "#333",
+        secondary: "#555",
+      },
       divider: "#D1D5DB",
-      background: { default: "#F4F6FA", paper: "#fff" },
-      DataGrid: { bg: "#fff", headerBg: variant.surface },
+      background: {
+        default: "#F4F6FA",
+        paper: "#fff",
+      },
+      DataGrid: {
+        bg: "#fff",
+        headerBg: variant.surface,
+      },
     },
     typography: { fontFamily: "Noto Sans KR, sans-serif" },
     shape: { borderRadius: 4 },

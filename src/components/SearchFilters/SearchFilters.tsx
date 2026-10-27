@@ -116,7 +116,7 @@ export function SearchFilters({ variant }: { variant: LayoutVariant }): ReactEle
           className={cx("panel_autocomplete")}
           options={libraryRoomOptions}
           value={libraryRoom}
-          onChange={(_, value) => setLibraryRoom(value)}
+          onChange={(...[, value]) => setLibraryRoom(value)}
           popupIcon={<ExpandMore />}
           forcePopupIcon
           noOptionsText="검색 결과가 없습니다."

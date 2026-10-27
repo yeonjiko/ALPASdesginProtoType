@@ -1,0 +1,8 @@
+.canvas {
+  display: grid;
+  grid-template-columns: 0 minmax(0, 1fr);
+  grid-template-rows: 0 minmax(0, 1fr);
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}

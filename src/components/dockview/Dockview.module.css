@@ -1,0 +1,142 @@
+.dockview {
+  --dv-tabs-and-actions-container-height: 40px;
+  --dv-tabs-and-actions-container-font-size: 13px;
+  --dv-tabs-and-actions-container-background-color: #e9eef5;
+  --dv-group-view-background-color: #fff;
+  --dv-activegroup-visiblepanel-tab-color: #fff;
+  --dv-activegroup-hiddenpanel-tab-color: #555;
+  --dv-inactivegroup-visiblepanel-tab-color: #555;
+  --dv-inactivegroup-hiddenpanel-tab-color: #777;
+  --dv-tab-divider-color: #d1d5db;
+  --dv-paneview-header-border-color: #d1d5db;
+  --dv-paneview-active-outline-color: var(--alpas-accent);
+}
+
+:global(.option_a) .dockview {
+  --dv-activegroup-visiblepanel-tab-background-color: #2468eb;
+  --dv-activegroup-hiddenpanel-tab-background-color: #eff5ff;
+  --dv-inactivegroup-visiblepanel-tab-background-color: #fff;
+  --dv-inactivegroup-hiddenpanel-tab-background-color: #eff5ff;
+}
+
+:global(.option_b) .dockview {
+  --dv-tabs-and-actions-container-background-color: #fff;
+  --dv-activegroup-visiblepanel-tab-background-color: #f97316;
+  --dv-activegroup-hiddenpanel-tab-background-color: #fff7ed;
+  --dv-inactivegroup-visiblepanel-tab-background-color: #fff;
+  --dv-inactivegroup-hiddenpanel-tab-background-color: #fff7ed;
+}
+
+:global(.active2) .dockview {
+  --dv-activegroup-hiddenpanel-tab-background-color: #f3f4f6;
+  --dv-inactivegroup-visiblepanel-tab-background-color: #fff;
+  --dv-inactivegroup-hiddenpanel-tab-background-color: #f3f4f6;
+}
+
+.dockview :global(.dv-tabs-and-actions-container):has(.tab_content) {
+  border-bottom: 1px solid #d1d5db;
+  color: #333;
+}
+
+.dockview :global(.dv-tab):has(.tab_content) {
+  min-width: 150px;
+  height: 40px;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+:global(.option_b.active) .dockview :global(.dv-tab):has(.tab_content) {
+  min-width: 116px;
+  padding: 8px;
+  font-size: 12px;
+}
+
+:global(.active2) .dockview :global(.dv-tab):has(.tab_content) {
+  min-width: 0;
+  width: auto;
+  padding: 8px;
+  font-size: 12px;
+}
+
+.dockview :global(.dv-tab.dv-active-tab):has(.tab_content) {
+  font-weight: 700;
+}
+
+.tab_content {
+  min-width: 0;
+}
+
+/* A separate concept: keep the four existing layout styles unchanged. */
+:global([data-dockview-style="rounded"]) .dockview {
+  --dv-tabs-and-actions-container-height: 48px;
+  --dv-tabs-and-actions-container-background-color: #f7f9fc;
+  --dv-activegroup-visiblepanel-tab-background-color: #eff5ff;
+  --dv-inactivegroup-visiblepanel-tab-background-color: #eff5ff;
+  --dv-activegroup-hiddenpanel-tab-background-color: #fff;
+  --dv-inactivegroup-hiddenpanel-tab-background-color: #fff;
+  --dv-activegroup-visiblepanel-tab-color: #254793;
+  --dv-inactivegroup-visiblepanel-tab-color: #254793;
+  --dv-activegroup-hiddenpanel-tab-color: #53627c;
+  --dv-inactivegroup-hiddenpanel-tab-color: #53627c;
+  --dv-tab-divider-color: transparent;
+  --alpas-dock-strip-border: #dfe7f2;
+  --alpas-dock-tab-border: #cbd6e6;
+  --alpas-dock-tab-active-border: #3f67ff;
+  --alpas-dock-tab-hover-border: #9eb7ef;
+  --alpas-dock-tab-hover-bg: #f5f8ff;
+}
+
+:global([data-dockview-style="rounded"])
+  .dockview
+  :global(.dv-tabs-and-actions-container):has(.tab_content) {
+  padding: 5px;
+  border: 1px solid var(--alpas-dock-strip-border);
+  border-radius: 10px;
+}
+
+:global([data-dockview-style="rounded"]) .dockview :global(.dv-tabs-container):has(.tab_content) {
+  align-items: center;
+  gap: 4px;
+}
+
+:global([data-dockview-style="rounded"]) .dockview :global(.dv-tab):has(.tab_content) {
+  min-width: 150px;
+  height: 36px;
+  padding: 7px 14px;
+  border: 1px solid var(--alpas-dock-tab-border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+:global([data-dockview-style="rounded"])
+  .dockview
+  :global(.dv-tab.dv-active-tab):has(.tab_content) {
+  border-color: var(--alpas-dock-tab-active-border);
+  font-weight: 700;
+}
+
+:global([data-dockview-style="rounded"])
+  .dockview
+  :global(.dv-tab.dv-inactive-tab):has(.tab_content):hover {
+  border-color: var(--alpas-dock-tab-hover-border);
+  background: var(--alpas-dock-tab-hover-bg);
+}
+
+:global([data-dockview-style="rounded"])
+  .dockview
+  :global(.dv-tab):has(.tab_content):focus-visible {
+  box-shadow: inset 0 0 0 1px var(--alpas-dock-tab-active-border);
+}
+
+:global([data-dockview-style="rounded"]) .dockview :global(.dv-tab):has(.tab_content)::after {
+  border-radius: inherit;
+}
+
+/* Both native actions and the nested settings button share the inset strip height. */
+:global([data-dockview-style="rounded"]) .dockview :global(.dv-right-actions-container) {
+  align-items: center;
+}

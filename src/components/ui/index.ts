@@ -16,3 +16,5 @@ export { Dialog } from "@/components/ui/Dialog/Dialog";
 export type { DialogProps } from "@/components/ui/Dialog/Dialog";
 export { DatePicker } from "@/components/ui/DatePicker/DatePicker";
 export type { DatePickerProps } from "@/components/ui/DatePicker/DatePicker";
+export { Label } from "@/components/ui/label/Label";
+export type { LabelProps } from "@/components/ui/label/Label";

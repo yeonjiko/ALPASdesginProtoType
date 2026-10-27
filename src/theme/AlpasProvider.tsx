@@ -9,7 +9,9 @@ import { variants, type LayoutVariant } from "@/theme/variants";
 export function AlpasProvider({
   variant = variants[0],
   children,
-}: React.PropsWithChildren<{ variant?: LayoutVariant }>): ReactElement | null {
+}: React.PropsWithChildren<{
+  variant?: LayoutVariant;
+}>): ReactElement | null {
   const theme = React.useMemo(() => createAlpasTheme(variant), [variant]);
   return (
     <ThemeProvider theme={theme}>

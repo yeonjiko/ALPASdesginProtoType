@@ -1,0 +1,344 @@
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  padding: 8px;
+  background: var(--work-surface, #f4f6fa);
+  color: var(--work-text, #333);
+  font-size: 14px;
+  line-height: 20px;
+}
+.sr_only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.notice {
+  position: absolute;
+  inset: auto 12px 44px;
+  z-index: 10;
+}
+.layout {
+  display: grid;
+  flex: 1;
+  grid-template-rows: 256px minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+  min-height: 0;
+  min-width: 0;
+}
+.height_long .layout {
+  grid-template-rows: 256px minmax(0, 1.3fr) minmax(0, 1fr);
+}
+.height_extra .layout {
+  grid-template-rows: 256px minmax(0, 1fr) minmax(0, 1.3fr);
+}
+.fixed_row {
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 0;
+  min-height: 0;
+}
+.fixed_row_content {
+  display: grid;
+  grid-template-columns: minmax(380px, 1.2fr) minmax(260px, 1fr) minmax(240px, 0.9fr);
+  gap: 8px;
+  min-width: 896px;
+  height: 238px;
+}
+.fixed_card {
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  padding: 12px;
+  border: 1px solid var(--work-border, #d1d5db);
+  border-radius: 4px;
+  background: var(--work-bg, #fff);
+}
+.entry_card {
+  overflow: visible;
+}
+.entry_form {
+  display: grid;
+  grid-template-columns: 56px minmax(140px, 1fr) minmax(132px, 1fr);
+  grid-auto-rows: 36px;
+  align-items: center;
+  gap: 8px;
+}
+.entry_form > label {
+  white-space: nowrap;
+}
+.entry_form > :global(.MuiTextField-root),
+.entry_form > :global(.MuiInputBase-root),
+.entry_form > :global(.MuiFormControl-root) {
+  width: 100%;
+  min-width: 0;
+}
+.entry_form :global(.MuiInputBase-root),
+.entry_form :global(.MuiPickersInputBase-root),
+.panel_manager :global(.MuiInputBase-root) {
+  height: 36px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.entry_date :global(.MuiPickersOutlinedInput-root) {
+  padding: 0 8px 0 12px;
+}
+.entry_date :global(.MuiInputAdornment-root) {
+  margin-left: 4px;
+}
+.entry_date :global(.MuiIconButton-root) {
+  width: 24px;
+  height: 24px;
+  margin-right: -2px;
+  padding: 0;
+}
+.entry_form :global(.MuiSelect-select),
+.panel_manager :global(.MuiSelect-select) {
+  padding: 8px 32px 8px 12px;
+}
+.entry_form .rfid_button:global(.MuiButton-root) {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  height: 80px;
+}
+.entry_form .settings_button {
+  grid-column: 1 / -1;
+}
+.page :global(.MuiButton-root),
+.panel_manager :global(.MuiButton-root) {
+  min-width: 72px;
+  height: 36px;
+  min-height: 36px;
+  padding: 0 8px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.fixed_card.member_card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+.member_tabs:global(.MuiTabs-root) {
+  flex-shrink: 0;
+  min-height: 36px;
+  border-bottom: 1px solid var(--work-border, #d1d5db);
+}
+.member_tabs :global(.MuiTab-root) {
+  min-width: 0;
+  min-height: 36px;
+  padding: 8px;
+  color: var(--work-text, #333);
+  font-size: 14px;
+  line-height: 20px;
+  opacity: 1;
+}
+.member_tabs :global(.MuiTab-root.Mui-selected) {
+  background: var(--alpas-surface, #eff5ff);
+  color: var(--alpas-accent, #2468eb);
+  font-weight: 700;
+}
+.member_tabs :global(.MuiTabs-indicator) {
+  background: var(--alpas-accent, #2468eb);
+}
+.member_panel {
+  flex: 1;
+  min-height: 0;
+}
+.member_summary {
+  display: flex;
+  align-items: center;
+}
+.member_facts {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 2px 8px;
+  width: 100%;
+  margin: 0;
+}
+.member_facts dt {
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.member_facts dd {
+  min-height: 20px;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.phone_flag {
+  color: var(--alpas-accent, #2468eb);
+  font-weight: 700;
+}
+.memo_card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.count_table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+.count_table th {
+  padding: 4px;
+  background: var(--alpas-surface, #eff5ff);
+  color: var(--work-text, #333);
+  font-size: 12px;
+}
+.count_table thead tr:first-child th {
+  background: var(--alpas-accent, #2468eb);
+  color: #fff;
+}
+.count_table td {
+  padding: 16px 4px;
+}
+.dock_row {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid var(--work-border, #d1d5db);
+  border-radius: 4px;
+  background: var(--work-bg, #fff);
+}
+.row_dock {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+.row_dock > div {
+  height: 100%;
+}
+.row_dock :global(.dv-tab) > :global(.dv-react-part) {
+  display: flex;
+  align-items: center;
+}
+.inner_tab {
+  display: block;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.row_dock :global(.dv-groupview) {
+  border-right: 1px solid var(--work-border, #d1d5db);
+}
+.panel_content {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+.grid_host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+.grid_host .list_grid:global(.MuiDataGrid-root) {
+  --DataGrid-overlayHeight: 0px;
+  min-height: 0;
+  width: 100%;
+}
+.panel_content .list_grid :global(.MuiDataGrid-main),
+.panel_content .list_grid :global(.MuiDataGrid-overlay) {
+  background: var(--work-bg, #fff);
+  color: var(--work-text, #555);
+}
+.processing_content {
+  display: grid;
+  grid-template-columns: minmax(220px, 30%) minmax(0, 1fr);
+  gap: 8px;
+  height: 100%;
+  min-height: 0;
+}
+.page_actions {
+  display: flex;
+  flex: 0 0 24px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+.page_actions :global(.MuiIconButton-root) {
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+}
+.info_content {
+  height: 100%;
+  overflow: hidden;
+  padding: 12px;
+  background: var(--work-bg, #fff);
+  color: var(--work-text, #333);
+}
+.info_content h3,
+.fixed_card h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  line-height: 24px;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.info_content .actions {
+  margin-top: 12px;
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  margin: auto;
+  border-radius: 50%;
+  background: var(--alpas-surface, #eff5ff);
+  color: var(--alpas-accent, #2468eb);
+  font-size: 32px;
+}
+.panel_manager :global(.MuiDialogContent-root) {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.panel_manager p {
+  margin: 0;
+}
+.row_summary {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--work-border, #d1d5db);
+  border-radius: 4px;
+}
+.row_summary p {
+  margin-top: 4px;
+  font-size: 12px;
+}
+.manager_fields {
+  display: grid;
+  gap: 16px;
+}
+.caption {
+  font-size: 12px;
+  line-height: 20px;
+}
+@media (max-width: 700px) {
+  .processing_content {
+    grid-template-columns: minmax(160px, 35%) minmax(0, 1fr);
+  }
+}

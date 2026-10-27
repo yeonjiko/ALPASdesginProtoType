@@ -25,10 +25,12 @@ export function Sidebar({
   variant,
   mode,
   onModeChange,
+  onOpenTask,
 }: {
   variant: LayoutVariant;
   mode: SidebarMode;
   onModeChange: (mode: SidebarMode) => void;
+  onOpenTask?: (title: string) => void;
 }): ReactElement | null {
   const [activeItem, setActiveItem] = React.useState(
     () => selectedSidebarItemFromHash() ?? "희망자료관리",
@@ -43,7 +45,7 @@ export function Sidebar({
   }, []);
 
   const customStyle: CssVariables = {
-    background: variant.dark,
+    background: variant.sidebarBackground,
     "--sidebar-accent": variant.accent,
     "--sidebar-active-hover": variant.option === "A" ? "#1D56BC" : "#EA580C",
   };
@@ -89,7 +91,7 @@ export function Sidebar({
       <nav className={cx("quick_nav")} aria-label="자료 유형 메뉴">
         <ul>
           <li>
-            <a href="#home" aria-label="홈">
+            <a href="#home" aria-label="홈" onClick={() => onOpenTask?.("대시보드")}>
               <HomeOutlined aria-hidden="true" />
             </a>
           </li>
@@ -115,7 +117,10 @@ export function Sidebar({
                     <a
                       href={sidebarItemHref(item)}
                       aria-current={activeItem === item ? "location" : undefined}
-                      onClick={() => setActiveItem(item)}
+                      onClick={() => {
+                        setActiveItem(item);
+                        onOpenTask?.(item);
+                      }}
                     >
                       {item}
                       {activeItem === item && <ChevronRight aria-hidden="true" />}

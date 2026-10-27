@@ -37,6 +37,7 @@ export function GridSettingsDialog({
   onClose: () => void;
   onSave: (value: GridSettingsDialogValue) => void;
 }): ReactElement | null {
+  const fieldId = React.useId();
   const [draft, setDraft] = React.useState(value);
 
   const [wasOpen, setWasOpen] = React.useState(open);
@@ -94,9 +95,10 @@ export function GridSettingsDialog({
               설정
             </Typography>
             <div className={cx("grid_settings_card grid_settings_values")}>
-              <label>
-                <span>글자크기</span>
+              <div className={cx("grid_settings_field")}>
+                <span id={`${fieldId}_font_size`}>글자크기</span>
                 <Select
+                  labelId={`${fieldId}_font_size`}
                   className={cx("grid_settings_select")}
                   size="small"
                   value={draft.fontSize}
@@ -109,10 +111,11 @@ export function GridSettingsDialog({
                   <MenuItem value={14}>14</MenuItem>
                   <MenuItem value={16}>16</MenuItem>
                 </Select>
-              </label>
-              <label>
-                <span>행 높이</span>
+              </div>
+              <div className={cx("grid_settings_field")}>
+                <span id={`${fieldId}_row_height`}>행 높이</span>
                 <Select
+                  labelId={`${fieldId}_row_height`}
                   className={cx("grid_settings_select")}
                   size="small"
                   value={draft.rowHeight}
@@ -125,10 +128,11 @@ export function GridSettingsDialog({
                   <MenuItem value={42}>보통</MenuItem>
                   <MenuItem value={48}>넓게</MenuItem>
                 </Select>
-              </label>
-              <label>
-                <span>한 번에</span>
+              </div>
+              <div className={cx("grid_settings_field")}>
+                <span id={`${fieldId}_batch_size`}>한 번에</span>
                 <Select
+                  labelId={`${fieldId}_batch_size`}
                   className={cx("grid_settings_select")}
                   size="small"
                   value={draft.batchSize}
@@ -141,10 +145,11 @@ export function GridSettingsDialog({
                   <MenuItem value={50}>50건</MenuItem>
                   <MenuItem value={100}>100건</MenuItem>
                 </Select>
-              </label>
-              <label>
-                <span>선택 범위</span>
+              </div>
+              <div className={cx("grid_settings_field")}>
+                <span id={`${fieldId}_selection_scope`}>선택 범위</span>
                 <Select
+                  labelId={`${fieldId}_selection_scope`}
                   className={cx("grid_settings_select")}
                   size="small"
                   value={draft.selectionScope}
@@ -156,7 +161,7 @@ export function GridSettingsDialog({
                   <MenuItem value="현재 화면">현재 화면</MenuItem>
                   <MenuItem value="전체 데이터">전체 데이터</MenuItem>
                 </Select>
-              </label>
+              </div>
             </div>
           </section>
           <section

@@ -5,6 +5,7 @@ import {
 } from "@mui/x-date-pickers/DesktopDatePicker";
 import { useTheme } from "@mui/material";
 import CalendarMonthOutlined from "@mui/icons-material/CalendarMonthOutlined";
+import { DatePickerField } from "@/components/ui/DatePicker/DatePickerField";
 import { AlpasCalendarHeader } from "@/components/DatePicker/AlpasCalendarHeader";
 import styles from "@/components/ui/DatePicker/DatePicker.module.css";
 import { joinClasses } from "@/styles/classes";
@@ -22,6 +23,7 @@ export function DatePicker({
       format="YYYY.MM.DD"
       {...props}
       slots={{
+        textField: DatePickerField,
         openPickerIcon: CalendarMonthOutlined,
         calendarHeader: AlpasCalendarHeader,
         ...slots,

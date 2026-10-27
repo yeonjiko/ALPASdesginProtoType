@@ -31,7 +31,29 @@ export const Disabled: Story = {
 export const Error: Story = {
   args: { error: true, helperText: "입력 내용을 확인해 주세요." },
 };
-export const WithLabel: Story = { args: { label: "자료명" } };
+export const WithLabel: Story = {
+  args: { label: "자료명", placeholder: "자료명을 입력하세요.", inputProps: {} },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByRole("textbox", { name: "자료명" });
+    const label = canvas.getByText("자료명", { selector: "label" });
+    await expect(input).toHaveAttribute("placeholder", "자료명을 입력하세요.");
+    await userEvent.click(label);
+    await expect(input).toHaveFocus();
+    await userEvent.type(input, "자료관리의 이해");
+    await expect(label).toBeVisible();
+    await expect(input).toHaveValue("자료관리의 이해");
+  },
+};
+export const Multiline: Story = {
+  args: {
+    label: "업무 메모",
+    placeholder: "메모를 입력하세요.",
+    inputProps: {},
+    multiline: true,
+    minRows: 3,
+  },
+};
 
 export const OptionA: Story = { globals: { variant: "0" } };
 export const OptionB: Story = { globals: { variant: "1" } };

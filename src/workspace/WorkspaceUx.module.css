@@ -1,0 +1,59 @@
+.workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  --work-bg: #fff;
+  --work-surface: #f4f6fa;
+  --work-text: #253247;
+  --work-border: #d4dce7;
+  color: var(--work-text);
+}
+
+.layout_controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 8px;
+}
+.layout_controls :global(.MuiButton-root) {
+  font-size: 11px;
+  min-width: 0;
+  padding: 4px 7px;
+}
+.auto_save {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-size: 12px;
+}
+.dock_host {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+.dock {
+  background: var(--work-bg);
+  color: var(--work-text);
+  --dv-group-view-background-color: var(--work-bg);
+}
+.dashboard {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  background: var(--work-bg);
+  color: var(--work-text);
+}
+.dashboard h1 {
+  font-size: 25px;
+  margin: 0;
+}
+.dashboard_cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
