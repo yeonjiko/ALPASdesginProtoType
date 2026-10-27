@@ -1,0 +1,73 @@
+.root:global(.MuiButton-root) {
+  box-shadow: none;
+}
+.root:global(.Mui-focusVisible) {
+  outline: 2px solid var(--button-focus);
+  outline-offset: 2px;
+}
+.root:global(.MuiButton-contained) {
+  color: #fff;
+  background: var(--button-accent);
+}
+.root:global(.MuiButton-contained):hover {
+  background: var(--button-hover);
+  box-shadow: none;
+}
+.root:global(.MuiButton-contained):active {
+  background: var(--button-pressed);
+}
+.root:global(.MuiButton-contained.Mui-disabled) {
+  color: #9ca3af;
+  background: #e5e7eb;
+}
+.root:global(.MuiButton-contained.MuiButton-loading) {
+  color: transparent;
+  background: var(--button-accent);
+}
+.root:global(.MuiButton-contained) :global(.MuiButton-loadingIndicator) {
+  color: #fff;
+}
+.root:global(.MuiButton-outlined) {
+  color: #555;
+  border-color: #d1d5db;
+  background: #fff;
+}
+.root:global(.MuiButton-outlined):hover {
+  color: var(--button-ink);
+  border-color: var(--button-focus);
+  background: var(--button-subtle);
+}
+.root:global(.MuiButton-outlined):active {
+  color: var(--button-pressed);
+  border-color: var(--button-pressed);
+  background: var(--button-down);
+}
+.root:global(.MuiButton-outlined.Mui-disabled) {
+  color: #9ca3af;
+  border-color: #e5e7eb;
+  background: #fff;
+}
+.root:global(.MuiButton-outlined.MuiButton-loading) {
+  color: transparent;
+  border-color: var(--button-focus);
+  background: #fff;
+}
+.root:global(.MuiButton-outlined) :global(.MuiButton-loadingIndicator) {
+  color: var(--button-ink);
+}
+.root:global(.MuiButton-outlined.action_with_tooltip) {
+  color: var(--button-accent);
+  border-color: var(--button-accent);
+}
+.root:global(.MuiButton-outlined.action_with_tooltip):hover {
+  color: var(--button-ink);
+  border-color: var(--button-focus);
+}
+.root:global(.MuiButton-outlined.action_with_tooltip):active {
+  color: var(--button-pressed);
+  border-color: var(--button-pressed);
+}
+.root:global(.MuiButton-outlined.action_with_tooltip.Mui-disabled) {
+  color: #9ca3af;
+  border-color: #e5e7eb;
+}

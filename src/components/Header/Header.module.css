@@ -1,0 +1,139 @@
+.app_header {
+  grid-column: 1 / -1;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px 0 8px;
+  border-bottom: 1px solid #d1d5db;
+  background: #fff;
+  color: #555;
+}
+
+.logo {
+  flex: 0 0 248px;
+  width: 248px;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+.header_tools {
+  min-width: 0;
+  flex-shrink: 0;
+  height: 36px;
+  align-self: flex-start;
+  margin-top: 10px;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.app_header:global(.option_a):global(.active) .header_tools {
+  margin-top: 9px;
+}
+.app_header:global(.option_a):global(.active2) .header_tools {
+  margin-top: 11px;
+}
+
+.header_search {
+  width: 321px;
+  height: 36px;
+  display: flex;
+  gap: 3px;
+  flex: 0 0 321px;
+}
+
+.header_search :global(.MuiTextField-root) {
+  width: 260px;
+  flex: 0 0 260px;
+}
+.header_search :global(.MuiOutlinedInput-root) {
+  height: 36px;
+  border-radius: 4px;
+}
+.header_search :global(.MuiInputBase-input) {
+  height: 20px;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.header_search :global(.MuiButton-root) {
+  width: 58px;
+  min-width: 58px;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.help {
+  flex: 0 0 107px;
+  align-self: flex-start;
+  margin: 10px 12px 0 12px;
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 17px;
+}
+.avatar {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #eef4ff;
+}
+.user {
+  min-width: 72px;
+  height: 32px;
+  align-self: flex-start;
+  margin: 1px 10px 0 0;
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 18px;
+}
+.user br {
+  display: none;
+}
+.user small {
+  display: block;
+  font-size: 12px;
+  line-height: 14px;
+}
+.header_settings,
+.header_logout {
+  display: flex;
+  flex: 0 0 32px;
+}
+.header_settings {
+  margin-right: 13px;
+}
+.header_settings :global(.MuiIconButton-root),
+.header_logout :global(.MuiIconButton-root) {
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 4px;
+}
+.header_settings :global(.MuiIconButton-root) {
+  background: #f3f4f6;
+}
+.header_logout :global(.MuiIconButton-root) {
+  background: #fee4e2;
+}
+.app_header svg {
+  font-size: 24px;
+}
+.header_logout svg {
+  color: #d92d20;
+  font-size: 20px;
+}
+
+@media (max-width: 900px) {
+  .logo {
+    flex-basis: 176px;
+    width: 176px;
+  }
+}

@@ -1,0 +1,97 @@
+.filters {
+  min-height: 56px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 7px 11px;
+  box-sizing: border-box;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.loan_filters :global(.MuiSelect-root) {
+  width: 156px;
+  flex: 0 0 156px;
+  height: 36px;
+  font-size: 14px;
+}
+.loan_filters :global(.MuiTextField-root) {
+  width: 108px;
+  flex: 0 0 108px;
+}
+.loan_filters .loan_search_textfield {
+  width: 280px;
+  flex: 0 0 280px;
+}
+.loan_filters :global(.MuiInputBase-root) {
+  height: 36px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.loan_filters :global(.MuiInputBase-root):global(.alpas_select) {
+  height: 36px;
+  line-height: 20px;
+  background: #fff;
+}
+.loan_filters :global(.alpas_select) :global(.MuiSelect-icon) {
+  right: 12px;
+  color: #555;
+}
+.loan_filters :global(.MuiInputBase-input) {
+  padding: 6px 8px;
+}
+.loan_filters :global(.MuiSelect-select):global(.MuiInputBase-input) {
+  padding: 6px 12px;
+  padding-right: 40px !important;
+  line-height: 20px;
+}
+.loan_filters input:global(.MuiInputBase-input) {
+  height: 20px;
+  line-height: 20px;
+  padding: 10px 12px;
+}
+.loan_filters :global(.MuiInputBase-input)::placeholder {
+  color: #777;
+  opacity: 1;
+}
+.loan_filters :global(.MuiOutlinedInput-notchedOutline) {
+  border-color: #d1d5db;
+}
+.date_separator {
+  flex: 0 0 16px;
+  height: 20px;
+  margin: 0 -4px;
+  color: #555;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+}
+.loan_filters :global(.MuiButton-root) {
+  width: auto;
+  min-width: 72px;
+  height: 36px;
+  padding: 0 8px;
+  gap: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  box-shadow: none;
+}
+.loan_filters :global(.MuiButton-root) svg {
+  font-size: 20px;
+}
+.loan_filters > :global(.MuiIconButton-root) {
+  width: 36px;
+  height: 36px;
+  padding: 7px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  color: #555;
+  background: #fff;
+}
+.loan_filters > :global(.MuiIconButton-root) svg {
+  font-size: 20px;
+}

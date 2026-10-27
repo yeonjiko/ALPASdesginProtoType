@@ -1,0 +1,119 @@
+.workspace {
+  grid-column: 2;
+  grid-row: 2;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  padding: 16px;
+}
+
+.dockview_shell {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.alpas_dockview {
+  width: 100%;
+  height: 100%;
+  --dv-tabs-and-actions-container-height: 40px;
+  --dv-tabs-and-actions-container-font-size: 13px;
+  --dv-tabs-and-actions-container-background-color: #e9eef5;
+  --dv-group-view-background-color: #fff;
+  --dv-activegroup-visiblepanel-tab-color: #fff;
+  --dv-activegroup-hiddenpanel-tab-color: #555;
+  --dv-inactivegroup-visiblepanel-tab-color: #555;
+  --dv-inactivegroup-hiddenpanel-tab-color: #777;
+  --dv-tab-divider-color: #d1d5db;
+  --dv-paneview-header-border-color: #d1d5db;
+  --dv-paneview-active-outline-color: var(--alpas-accent);
+}
+
+:global(.option_a) .alpas_dockview {
+  --dv-activegroup-visiblepanel-tab-background-color: #2468eb;
+  --dv-activegroup-hiddenpanel-tab-background-color: #eff5ff;
+  --dv-inactivegroup-visiblepanel-tab-background-color: #fff;
+  --dv-inactivegroup-hiddenpanel-tab-background-color: #eff5ff;
+}
+
+:global(.option_b) .alpas_dockview {
+  --dv-tabs-and-actions-container-background-color: #fff;
+  --dv-activegroup-visiblepanel-tab-background-color: #f97316;
+  --dv-activegroup-hiddenpanel-tab-background-color: #fff7ed;
+  --dv-inactivegroup-visiblepanel-tab-background-color: #fff;
+  --dv-inactivegroup-hiddenpanel-tab-background-color: #fff7ed;
+}
+
+:global(.active2) .alpas_dockview {
+  --dv-activegroup-hiddenpanel-tab-background-color: #f3f4f6;
+  --dv-inactivegroup-visiblepanel-tab-background-color: #fff;
+  --dv-inactivegroup-hiddenpanel-tab-background-color: #f3f4f6;
+}
+
+.alpas_dockview :global(.dv-tabs-and-actions-container) {
+  border-bottom: 1px solid #d1d5db;
+}
+.alpas_dockview :global(.dv-tab) {
+  min-width: 150px;
+  height: 40px;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  font-size: 13px;
+  line-height: 20px;
+}
+:global(.option_b):global(.active) .alpas_dockview :global(.dv-tab) {
+  min-width: 116px;
+  padding: 8px;
+  font-size: 12px;
+}
+:global(.active2) .alpas_dockview :global(.dv-tab) {
+  min-width: 0;
+  width: auto;
+  padding: 8px;
+  font-size: 12px;
+}
+.alpas_dockview :global(.dv-tab):global(.dv-active-tab) {
+  font-weight: 700;
+}
+.alpas_dockview :global(.dv-tab) :global(.dv-default-tab-action) {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  visibility: visible;
+  padding: 4px;
+}
+.alpas_dockview
+  :global(.dv-tab):global(.dv-inactive-tab)
+  :global(.dv-default-tab)
+  :global(.dv-default-tab-action) {
+  visibility: visible;
+}
+.alpas_dockview :global(.dv-tab) :global(.dv-svg) {
+  width: 8px;
+  height: 8px;
+}
+.dock_header_actions {
+  gap: 8px;
+  height: 32px;
+  margin-top: 8px;
+  padding-right: 4px;
+}
+.dock_header_actions :global(.MuiIconButton-root) {
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+}
+.dock_header_actions svg {
+  font-size: 24px;
+}
+
+@media (max-width: 900px) {
+  .workspace {
+    padding: 8px;
+  }
+}

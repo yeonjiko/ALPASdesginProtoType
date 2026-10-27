@@ -1,0 +1,7 @@
+.root {
+  flex-shrink: 0;
+}
+.root:global(.Mui-focusVisible) {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}

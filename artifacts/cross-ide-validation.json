@@ -1,0 +1,25 @@
+{
+  "scope": "D:/고연지/prototype/ALPASdesginProtoType",
+  "configuration": {
+    "react": 19,
+    "esm": true,
+    "node": "^22.13.0 || ^24.0.0",
+    "installedNode": "v22.21.0",
+    "originalScriptsPreserved": true,
+    "originalDependenciesPreserved": true
+  },
+  "saveTests": {
+    "intellij": {
+      "passed": true,
+      "output": "import type { ReactElement } from \"react\";\nexport function FormatProbe(): ReactElement {\n  const title = \"자료관리 포맷 테스트\";\n  return <button type=\"button\">{title}</button>;\n}\n"
+    },
+    "vscode": {
+      "passed": true,
+      "output": "import type { ReactElement } from \"react\";\nexport function FormatProbe(): ReactElement {\n  const title = \"자료관리 포맷 테스트\";\n  return <button type=\"button\">{title}</button>;\n}\n"
+    }
+  },
+  "identicalOutput": true,
+  "temporaryProbeRemoved": true,
+  "originalMergeFragmentsFound": false,
+  "note": "Named package-scripts.json, package-dev-dependencies.json and .gitignore.fragment were not present; actual project configuration was inspected and merged. Node 24 was not executed on this machine."
+}

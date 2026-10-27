@@ -1,0 +1,265 @@
+:global(.loan_filters) .panel_date_picker_shell {
+  width: 132px;
+  height: 36px;
+  flex: 0 0 132px;
+}
+:global(.loan_filters) .panel_date_picker_shell :global(.MuiPickersTextField-root) {
+  width: 132px;
+}
+:global(.loan_filters) .panel_date_picker_shell :global(.MuiPickersOutlinedInput-root) {
+  width: 132px;
+  height: 36px;
+  padding: 0 8px 0 12px;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+}
+:global(.loan_filters) .panel_date_picker_shell :global(.MuiPickersInputBase-sectionsContainer) {
+  height: 36px;
+  padding: 0;
+  align-items: center;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+}
+:global(.loan_filters) .panel_date_picker_shell :global(.MuiPickersInputBase-sectionContent) {
+  font: inherit;
+}
+:global(.loan_filters)
+  .panel_date_picker_shell
+  :global(.MuiPickersInputBase-sectionContent)[aria-valuetext="Empty"] {
+  color: #555;
+}
+:global(.loan_filters) .panel_date_picker_shell :global(.MuiInputAdornment-root) {
+  margin-left: 4px;
+}
+:global(.loan_filters) .panel_date_picker_shell :global(.MuiIconButton-root) {
+  width: 24px;
+  height: 24px;
+  margin-right: -2px;
+  padding: 0;
+  color: #555;
+}
+:global(.loan_filters) .panel_date_picker_shell :global(.MuiIconButton-root) svg {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+}
+:global(.loan_filters) .panel_date_picker_shell :global(.MuiPickersOutlinedInput-notchedOutline) {
+  border-color: #d1d5db;
+}
+:global(.option_a)
+  :global(.loan_filters)
+  .panel_date_picker_shell
+  :global(.MuiPickersOutlinedInput-root):not(:global(.Mui-disabled)):not(:global(.Mui-error)):not(
+    :global(.Mui-focused)
+  ):hover
+  :global(.MuiPickersOutlinedInput-notchedOutline) {
+  border-color: #2468eb;
+}
+:global(.option_b)
+  :global(.loan_filters)
+  .panel_date_picker_shell
+  :global(.MuiPickersOutlinedInput-root):not(:global(.Mui-disabled)):not(:global(.Mui-error)):not(
+    :global(.Mui-focused)
+  ):hover
+  :global(.MuiPickersOutlinedInput-notchedOutline) {
+  border-color: #f97316;
+}
+:global(.option_a)
+  :global(.loan_filters)
+  .panel_date_picker_shell
+  :global(.MuiPickersOutlinedInput-root):global(.Mui-focused)
+  :global(.MuiPickersOutlinedInput-notchedOutline) {
+  border-color: #2468eb;
+  border-width: 2px;
+}
+:global(.option_b)
+  :global(.loan_filters)
+  .panel_date_picker_shell
+  :global(.MuiPickersOutlinedInput-root):global(.Mui-focused)
+  :global(.MuiPickersOutlinedInput-notchedOutline) {
+  border-color: #f97316;
+  border-width: 2px;
+}
+:global(.loan_filters)
+  .panel_date_picker_shell
+  :global(.MuiPickersOutlinedInput-root):global(.Mui-error)
+  :global(.MuiPickersOutlinedInput-notchedOutline) {
+  border-color: #d32f2f;
+}
+:global(.loan_filters)
+  .panel_date_picker_shell
+  :global(.MuiPickersOutlinedInput-root):global(.Mui-disabled) {
+  background: #f8fafc;
+}
+:global(.MuiPopper-root).alpas_date_picker_popper {
+  margin-top: 8px !important;
+}
+.alpas_date_picker_paper:global(.MuiPaper-root) {
+  width: 320px;
+  height: 328px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 16%);
+}
+.alpas_date_picker_paper :global(.MuiDateCalendar-root) {
+  width: 320px;
+  height: 328px;
+  max-height: 328px;
+}
+.alpas_date_picker_paper :global(.MuiPickersCalendarHeader-root) {
+  min-height: 32px;
+  max-height: 32px;
+  margin: 16px 0 8px;
+  padding: 0 16px 0 24px;
+}
+.alpas_date_picker_paper :global(.MuiPickersCalendarHeader-label) {
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+}
+.alpas_date_picker_paper :global(.MuiPickersCalendarHeader-labelContainer) {
+  position: relative;
+  height: 32px;
+  width: 196px;
+  flex: 0 0 196px;
+  margin-right: 20px;
+}
+.alpas_date_picker_paper :global(.MuiPickersCalendarHeader-label) {
+  flex: 1;
+  margin-right: 0;
+}
+.alpas_date_picker_paper :global(.MuiPickersCalendarHeader-switchViewButton) {
+  position: absolute;
+  top: 4px;
+  right: 0;
+  margin: 0;
+}
+.alpas_date_picker_paper :global(.MuiPickersArrowSwitcher-root) {
+  column-gap: 8px;
+}
+.alpas_date_picker_paper :global(.MuiPickersCalendarHeader-switchViewButton),
+.alpas_date_picker_paper :global(.MuiPickersArrowSwitcher-button) {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  color: #555;
+}
+.alpas_date_picker_paper :global(.MuiDayCalendar-header) {
+  height: 32px;
+}
+.alpas_date_picker_paper :global(.MuiDayCalendar-weekDayLabel) {
+  width: 40px;
+  height: 32px;
+  margin: 0;
+  color: #555;
+  font-size: 12px;
+  line-height: 16px;
+}
+.alpas_date_picker_paper :global(.MuiDayCalendar-slideTransition) {
+  min-height: 240px;
+}
+.alpas_date_picker_paper :global(.MuiDayCalendar-weekContainer) {
+  margin: 0;
+}
+.alpas_date_picker_paper :global(.MuiPickerDay-root) {
+  width: 36px;
+  height: 36px;
+  margin: 2px;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 1px solid transparent;
+}
+.alpas_date_picker_popper:global(.option_a)
+  :global(.MuiPickerDay-root):not(:global(.Mui-selected)):not(:global(.MuiPickerDay-today)):hover,
+.alpas_date_picker_popper:global(.option_a)
+  :global(.MuiPickerDay-root):not(:global(.Mui-selected)):not(:global(.MuiPickerDay-today)):global(
+    .Mui-focusVisible
+  ) {
+  background: #eff5ff !important;
+  background-color: #eff5ff !important;
+}
+.alpas_date_picker_popper:global(.option_a)
+  :global(.MuiPickerDay-root):global(.MuiPickerDay-today):not(:global(.Mui-selected)),
+.alpas_date_picker_popper:global(.option_a)
+  :global(.MuiPickerDay-root):global(.MuiPickerDay-today):not(:global(.Mui-selected)):hover,
+.alpas_date_picker_popper:global(.option_a)
+  :global(.MuiPickerDay-root):global(.MuiPickerDay-today):not(:global(.Mui-selected)):global(
+    .Mui-focusVisible
+  ) {
+  background: #fff;
+  color: #333;
+  outline: 1px solid #2468e8;
+  border-radius: 50%;
+  outline-offset: -1.8px;
+}
+.alpas_date_picker_popper:global(.option_b)
+  :global(.MuiPickerDay-root):not(:global(.Mui-selected)):not(:global(.MuiPickerDay-today)):hover,
+.alpas_date_picker_popper:global(.option_b)
+  :global(.MuiPickerDay-root):not(:global(.Mui-selected)):not(:global(.MuiPickerDay-today)):global(
+    .Mui-focusVisible
+  ) {
+  background: #fff7ed !important;
+  background-color: #fff7ed !important;
+}
+.alpas_date_picker_popper:global(.option_b)
+  :global(.MuiPickerDay-root):global(.MuiPickerDay-today):not(:global(.Mui-selected)),
+.alpas_date_picker_popper:global(.option_b)
+  :global(.MuiPickerDay-root):global(.MuiPickerDay-today):not(:global(.Mui-selected)):hover,
+.alpas_date_picker_popper:global(.option_b)
+  :global(.MuiPickerDay-root):global(.MuiPickerDay-today):not(:global(.Mui-selected)):global(
+    .Mui-focusVisible
+  ) {
+  background: #fff;
+  color: #333;
+  outline: 1px solid #f97316 !important;
+  border-radius: 50%;
+  outline-offset: -1.8px;
+}
+.alpas_date_picker_popper:global(.option_a) :global(.MuiPickerDay-root):global(.Mui-selected),
+.alpas_date_picker_popper:global(.option_a) :global(.MuiPickerDay-root):global(.Mui-selected):hover,
+.alpas_date_picker_popper:global(.option_a)
+  :global(.MuiPickerDay-root):global(.Mui-selected):global(.Mui-focusVisible),
+.alpas_date_picker_popper:global(.option_a) :global(.MuiMonthCalendar-button):global(.Mui-selected),
+.alpas_date_picker_popper:global(.option_a) :global(.MuiYearCalendar-button):global(.Mui-selected) {
+  background: #2468e8;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 50%;
+}
+.alpas_date_picker_popper:global(.option_b) :global(.MuiPickerDay-root):global(.Mui-selected),
+.alpas_date_picker_popper:global(.option_b) :global(.MuiPickerDay-root):global(.Mui-selected):hover,
+.alpas_date_picker_popper:global(.option_b)
+  :global(.MuiPickerDay-root):global(.Mui-selected):global(.Mui-focusVisible),
+.alpas_date_picker_popper:global(.option_b) :global(.MuiMonthCalendar-button):global(.Mui-selected),
+.alpas_date_picker_popper:global(.option_b) :global(.MuiYearCalendar-button):global(.Mui-selected) {
+  background: #f97316;
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 50%;
+}
+@media (max-height: 480px) {
+  :global(.MuiPopper-root).alpas_date_picker_popper {
+    position: fixed !important;
+    inset: 8px auto auto 50% !important;
+    margin-top: 0 !important;
+    transform: translateX(-50%) !important;
+  }
+}
+@media (max-height: 480px) {
+  .alpas_date_picker_paper:global(.MuiPaper-root) {
+    max-height: calc(100vh - 16px);
+    overflow-y: auto;
+  }
+}
+
+.root {
+  font-family: inherit;
+}

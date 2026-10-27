@@ -1,0 +1,8 @@
+.ui_canvas {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+  color: #333;
+  font-family: "Noto Sans KR", sans-serif;
+}

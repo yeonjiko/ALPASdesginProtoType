@@ -1,0 +1,16 @@
+/* The prototype intentionally locks body scrolling; Docs must scroll independently. */
+html:has(.sbdocs-wrapper) {
+  height: auto;
+  min-height: 100%;
+}
+body:has(.sbdocs-wrapper) {
+  height: auto;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+body:has(.sbdocs-wrapper) #storybook-docs {
+  height: auto;
+  min-height: 100vh;
+  overflow: visible;
+}

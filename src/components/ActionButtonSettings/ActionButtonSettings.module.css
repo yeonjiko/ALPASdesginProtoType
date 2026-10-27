@@ -1,0 +1,212 @@
+.actions {
+  position: relative;
+  min-width: 0;
+  min-height: 40px;
+  height: auto;
+  flex: 0 0 auto;
+  margin: 16px 0 12px;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+:global(.option_a):global(.active2) .actions {
+  margin-top: 26px;
+}
+.action_drop_zone {
+  min-width: 0;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-right: 40px;
+}
+.action_button_shell {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+.actions :global(.MuiButton-root).action_with_tooltip {
+  width: max-content;
+  flex: 0 0 auto;
+  height: 32px;
+  min-width: 0;
+  padding: 0 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+.actions.is_editing {
+  min-height: 104px;
+  padding: 8px;
+  border: 1px dashed var(--alpas-accent);
+  border-radius: 4px;
+  background: #fff;
+}
+.actions.is_editing .action_drop_zone {
+  min-height: 40px;
+}
+.actions.is_editing .action_active_zone {
+  padding-right: 40px;
+}
+.action_inactive_zone {
+  margin-top: 8px;
+  padding: 4px 88px 4px 8px;
+  border-radius: 4px;
+  background: #f3f4f6;
+}
+.actions:not(.is_editing) .action_inactive_zone {
+  min-height: 40px;
+}
+.action_storage_placeholder {
+  color: #777;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: normal;
+}
+.actions.is_editing .action_button_shell,
+.actions.is_editing .action_with_tooltip {
+  cursor: grab;
+}
+.actions.is_editing .action_with_tooltip:active {
+  cursor: grabbing;
+}
+.actions .action_with_tooltip.is_dragging {
+  opacity: 0.4;
+}
+.actions:not(.is_editing)
+  :global(.MuiButton-root).action_with_tooltip.is_inactive:global(.Mui-disabled) {
+  border-color: #d1d5db;
+  color: #777;
+  background: #f3f4f6;
+  opacity: 0.72;
+}
+:global(.MuiTooltip-tooltip).alpas_action_tooltip {
+  max-width: 228px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: #616161;
+  color: #fff;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  word-break: keep-all;
+}
+:global(.MuiTooltip-arrow).alpas_action_tooltip_arrow {
+  color: #616161;
+}
+
+.actions .panel_settings {
+  position: absolute;
+  top: 4px;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  padding: 4px;
+  border-radius: 4px;
+  color: #fff;
+  background: var(--alpas-accent);
+}
+.actions .panel_settings:hover {
+  background: var(--alpas-accent);
+}
+.actions.is_editing .panel_settings {
+  top: 8px;
+  right: 8px;
+}
+.action_edit_controls {
+  position: absolute;
+  right: 8px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.actions .action_layout_control:global(.MuiIconButton-root) {
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border: 1px solid var(--alpas-accent);
+  border-radius: 4px;
+  color: var(--alpas-accent);
+  background: #fff;
+}
+.actions .action_layout_control:global(.MuiIconButton-root):hover {
+  background: var(--alpas-surface);
+}
+.actions .action_layout_save:global(.MuiIconButton-root) {
+  color: #fff;
+  background: var(--alpas-accent);
+}
+.actions .action_layout_save:global(.MuiIconButton-root):hover {
+  background: var(--alpas-accent);
+}
+.actions .action_layout_control svg {
+  font-size: 20px;
+}
+
+.action_save_dialog :global(.MuiBackdrop-root) {
+  background: rgb(15 23 42 / 32%);
+}
+.action_save_dialog_paper:global(.MuiDialog-paper) {
+  width: 400px;
+  max-width: calc(100vw - 32px);
+  margin: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgb(15 23 42 / 20%);
+  overflow: hidden;
+}
+.action_save_dialog_title:global(.MuiDialogTitle-root) {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.action_save_dialog_title :global(.MuiTypography-root) {
+  color: #333;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+}
+.action_save_dialog_title :global(.MuiIconButton-root) {
+  width: 32px;
+  height: 32px;
+  margin-right: -8px;
+  padding: 6px;
+  color: #555;
+}
+.action_save_dialog_content:global(.MuiDialogContent-root) {
+  padding: 20px;
+}
+.action_save_dialog_title:global(.MuiDialogTitle-root)
+  + .action_save_dialog_content:global(.MuiDialogContent-root) {
+  padding-top: 20px;
+}
+.action_save_dialog_content :global(.MuiTypography-root) {
+  color: #555;
+  font-size: 14px;
+  line-height: 20px;
+}
+.action_save_dialog_actions:global(.MuiDialogActions-root) {
+  min-height: 64px;
+  padding: 12px 20px;
+  border-top: 1px solid #e5e7eb;
+}
+.action_save_dialog_actions :global(.MuiButton-root) {
+  min-width: 64px;
+  height: 40px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  box-shadow: none;
+}

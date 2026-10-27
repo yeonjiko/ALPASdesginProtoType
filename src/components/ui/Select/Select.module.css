@@ -1,0 +1,26 @@
+.alpas_favorite_menu {
+  margin-left: -10px !important;
+}
+.alpas_selection_indicator_menu .selection_indicator_option:global(.MuiMenuItem-root) {
+  gap: 8px;
+  padding: 6px 20px;
+}
+.alpas_selection_indicator_menu :global(.MuiCheckbox-root) {
+  width: 24px;
+  height: 24px;
+  padding: 3px;
+  flex: 0 0 24px;
+}
+.alpas_selection_indicator_menu :global(.MuiCheckbox-root) :global(.MuiSvgIcon-root) {
+  font-size: 24px;
+}
+.alpas_select :global(.MuiOutlinedInput-notchedOutline) {
+  border-color: #d1d5db;
+}
+.alpas_select :global(.MuiSelect-icon) {
+  color: #d1d5db;
+}
+
+.root {
+  font-family: inherit;
+}

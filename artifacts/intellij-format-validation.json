@@ -1,0 +1,17 @@
+{
+  "ide": "IntelliJ IDEA 2024.2.4",
+  "method": "IDE action: Reformat with Prettier",
+  "configurationMode": "AUTOMATIC",
+  "passed": [
+    "project Prettier configuration",
+    "double quotes",
+    "semicolons",
+    "two-space indentation",
+    "LF",
+    "output matches CLI Prettier check"
+  ],
+  "runOnSave": false,
+  "settingsChanged": false,
+  "formattedSample": "export function FormatProbe() {\n  const title = \"자료관리 포맷 테스트\";\n  return <button type=\"button\">{title}</button>;\n}\n",
+  "temporaryFileRemoved": true
+}

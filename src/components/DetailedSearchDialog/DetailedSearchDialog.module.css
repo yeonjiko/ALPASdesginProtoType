@@ -1,0 +1,213 @@
+.detailed_search_dialog :global(.MuiBackdrop-root) {
+  background: rgb(15 23 42 / 32%);
+}
+.detailed_search_dialog_paper:global(.MuiDialog-paper) {
+  width: 608px;
+  height: auto;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 32px);
+  margin: 16px;
+  box-sizing: border-box;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgb(15 23 42 / 20%);
+  overflow: hidden;
+}
+.detailed_search_title:global(.MuiDialogTitle-root) {
+  min-height: 56px;
+  flex: 0 0 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.detailed_search_title :global(.MuiTypography-root) {
+  color: #333;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+}
+.detailed_search_close:global(.MuiIconButton-root) {
+  width: 36px;
+  height: 36px;
+  margin-right: -10px;
+  padding: 8px;
+  color: #555;
+}
+.detailed_search_close svg {
+  font-size: 20px;
+}
+.detailed_search_content:global(.MuiDialogContent-root) {
+  min-height: 0;
+  flex: 1 1 auto;
+  padding: 16px;
+  overflow-y: auto;
+}
+.detailed_search_title:global(.MuiDialogTitle-root)
+  + .detailed_search_content:global(.MuiDialogContent-root) {
+  padding-top: 16px;
+}
+.detailed_search_form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.detailed_search_row {
+  min-height: 36px;
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+.detailed_search_label {
+  color: #555;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+}
+.detailed_search_control_group,
+.detailed_search_date_range {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.detailed_search_select:global(.MuiInputBase-root) {
+  width: 100%;
+  height: 36px;
+  color: #333;
+  background: #fff;
+  font-size: 14px;
+  line-height: 20px;
+}
+.detailed_search_control_group .detailed_search_select {
+  flex: 1 1 auto;
+}
+.detailed_search_control_group :global(.MuiButton-root) {
+  flex: 0 0 auto;
+  min-width: 92px;
+  height: 36px;
+  padding: 8px 14px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.detailed_search_select :global(.MuiSelect-select):global(.MuiInputBase-input) {
+  min-height: 20px;
+  padding: 6px 40px 6px 12px;
+  line-height: 20px;
+}
+.detailed_search_select :global(.MuiSelect-icon) {
+  right: 12px;
+  color: #555;
+}
+.detailed_search_input:global(.MuiFormControl-root) {
+  width: 100%;
+}
+.detailed_search_input :global(.MuiOutlinedInput-root) {
+  width: 100%;
+  height: 36px;
+  background: #fff;
+}
+.detailed_search_input :global(.MuiInputBase-input) {
+  height: 20px;
+  padding: 6px 12px;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+}
+.detailed_search_date_range {
+  width: 100%;
+}
+.detailed_search_date_range > :global(.MuiFormControl-root) {
+  min-width: 0;
+  flex: 1 1 0;
+}
+.detailed_search_date_input :global(.MuiPickersOutlinedInput-root) {
+  width: 100%;
+  height: 36px;
+  padding: 0 8px 0 12px;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+}
+.detailed_search_date_input :global(.MuiPickersInputBase-sectionsContainer) {
+  height: 36px;
+  padding: 0;
+  align-items: center;
+}
+.detailed_search_date_input :global(.MuiInputAdornment-root) {
+  margin-left: 4px;
+}
+.detailed_search_date_input :global(.MuiIconButton-root) {
+  width: 24px;
+  height: 24px;
+  margin-right: -2px;
+  padding: 0;
+  color: #555;
+}
+.detailed_search_date_input :global(.MuiIconButton-root) svg {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+}
+.detailed_search_date_separator {
+  flex: 0 0 auto;
+  color: #555;
+  font-size: 14px;
+  line-height: 20px;
+}
+.detailed_search_keep {
+  min-width: 52px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #555;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.detailed_search_keep :global(.MuiCheckbox-root) {
+  width: 24px;
+  height: 24px;
+  padding: 3px;
+}
+.detailed_search_keep :global(.MuiCheckbox-root) :global(.MuiSvgIcon-root) {
+  font-size: 24px;
+}
+.detailed_search_actions:global(.MuiDialogActions-root) {
+  min-height: 72px;
+  flex: 0 0 72px;
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  gap: 8px;
+  border-top: 1px solid #e5e7eb;
+}
+.detailed_search_actions :global(.MuiButton-root) {
+  min-width: 72px;
+  height: 40px;
+  padding: 8px 14px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.detailed_search_actions_spacer {
+  flex: 1 1 auto;
+}
+
+@media (max-width: 680px) {
+  .detailed_search_row {
+    grid-template-columns: 88px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .detailed_search_keep {
+    grid-column: 2;
+  }
+}

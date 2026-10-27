@@ -1,0 +1,8 @@
+node_modules
+dist
+storybook-static
+.npm-cache
+.serena
+artifacts
+package-lock.json
+*.tsbuildinfo

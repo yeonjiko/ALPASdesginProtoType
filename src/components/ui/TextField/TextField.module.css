@@ -1,0 +1,17 @@
+.root {
+  min-width: 0;
+  font-family: inherit;
+}
+.root :global(.MuiOutlinedInput-root) {
+  height: 36px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.root :global(.MuiOutlinedInput-input) {
+  padding: 8px 12px;
+}
+.root :global(.MuiInputBase-input)::placeholder {
+  color: #777;
+  opacity: 1;
+}

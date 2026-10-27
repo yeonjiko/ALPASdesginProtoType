@@ -1,0 +1,3 @@
+.root :global(.MuiDialog-paper) {
+  font-family: inherit;
+}

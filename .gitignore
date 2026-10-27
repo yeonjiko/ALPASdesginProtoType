@@ -6,3 +6,16 @@ dist/
 .env
 .env.*
 !.env.example
+
+storybook-static/
+
+# Local IDE state and generated files
+.idea/workspace.xml
+.idea/shelf/
+.idea/httpRequests/
+.idea/dataSources/
+.idea/dataSources.local.xml
+.idea/*.iml
+npm-debug.log*
+.DS_Store
+Thumbs.db

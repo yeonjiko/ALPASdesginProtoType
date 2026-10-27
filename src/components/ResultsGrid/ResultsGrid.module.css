@@ -1,0 +1,161 @@
+.grid_infinite_host {
+  min-width: 0;
+  min-height: 100px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.grid_infinite_host .alpas_grid:global(.MuiDataGrid-root) {
+  width: 100%;
+}
+.alpas_grid:global(.MuiDataGrid-root) {
+  min-height: 100px;
+  flex: 1;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #555;
+  font-size: 14px;
+}
+.alpas_grid :global(.MuiDataGrid-main) {
+  border-radius: 4px;
+  background: #fff;
+}
+.alpas_grid :global(.MuiDataGrid-main)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  border: 1px solid #d1d5db;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.alpas_grid:global(.MuiDataGrid-root) :global(.MuiDataGrid-columnHeader) {
+  padding: 0 8px;
+}
+.alpas_grid :global(.MuiDataGrid-columnHeaderTitle) {
+  font-weight: 700;
+  line-height: 20px;
+}
+.alpas_grid:global(.MuiDataGrid-root) :global(.MuiDataGrid-columnSeparator) {
+  color: #d1d5db;
+}
+.alpas_grid:global(.MuiDataGrid-root) :global(.MuiDataGrid-columnSeparator--resizable):hover,
+.alpas_grid:global(.MuiDataGrid-root) :global(.MuiDataGrid-columnSeparator--resizing) {
+  color: var(--alpas-accent);
+}
+:global(.dockview_shell):global(.active) .alpas_grid :global(.MuiDataGrid-row) {
+  color: #333;
+  background: #fff;
+  border-bottom: 1px solid #d1d5db;
+}
+:global(.dockview_shell):global(.active) .alpas_grid :global(.MuiDataGrid-cell) {
+  border-bottom: 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+:global(.dockview_shell):global(.active)
+  .alpas_grid
+  :global(.MuiDataGrid-cell):not(:global(.MuiDataGrid-cellCheckbox)) {
+  padding: 10px 8px 12px;
+}
+:global(.dockview_shell):global(.active) .alpas_grid :global(.MuiDataGrid-row):hover {
+  background: var(--alpas-surface);
+}
+:global(.dockview_shell):global(.active)
+  .alpas_grid
+  :global(.MuiDataGrid-row):global(.Mui-selected),
+:global(.dockview_shell):global(.active)
+  .alpas_grid
+  :global(.MuiDataGrid-row):global(.Mui-selected):hover {
+  background: var(--alpas-row-selected);
+}
+.alpas_grid :global(.MuiDataGrid-iconSeparator) {
+  height: 24px;
+}
+.alpas_grid :global(.MuiDataGrid-columnHeaderCheckbox) :global(.MuiCheckbox-root) {
+  width: 24px;
+  height: 24px;
+  padding: 3px;
+}
+.alpas_grid :global(.MuiDataGrid-columnHeaderCheckbox) :global(.MuiSvgIcon-root) {
+  font-size: 24px;
+}
+.alpas_grid:global(.MuiDataGrid-root) :global(.MuiDataGrid-overlay) {
+  background: #fff;
+  color: #555;
+  font-size: 13px;
+  line-height: 20px;
+}
+.alpas_grid .alpas_empty {
+  padding-bottom: calc(42px - var(--DataGrid-scrollbarSize) * var(--DataGrid-hasScrollX));
+}
+.alpas_grid :global(.MuiDataGrid-cell) {
+  font-size: var(--alpas-grid-font-size, 14px);
+}
+.grid_foot:global(.MuiDataGrid-footerContainer) {
+  position: relative;
+  margin-top: 8px;
+  height: 40px;
+  min-height: 40px;
+  flex: 0 0 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  border: 0;
+  color: #777;
+  font-size: 14px;
+  line-height: 20px;
+  background: #f8fafc;
+}
+.grid_foot > span {
+  white-space: nowrap;
+}
+.per_page_control {
+  position: absolute;
+  top: 50%;
+  right: 48px;
+  transform: translateY(-50%);
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.per_page_select:global(.MuiInputBase-root) {
+  width: 76px;
+  height: 32px;
+  color: #555;
+  background: #fff;
+  font-size: 14px;
+  line-height: 20px;
+}
+.per_page_select :global(.MuiSelect-select):global(.MuiInputBase-input) {
+  min-height: 20px;
+  padding: 5px 28px 5px 10px;
+  line-height: 20px;
+}
+.per_page_select :global(.MuiOutlinedInput-notchedOutline) {
+  border-color: #d1d5db;
+}
+.per_page_select :global(.MuiSelect-icon) {
+  right: 4px;
+  color: #555;
+}
+.grid_foot :global(.grid_settings) {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  color: #555;
+  background: #fff;
+}
+.grid_foot svg {
+  font-size: 24px;
+}

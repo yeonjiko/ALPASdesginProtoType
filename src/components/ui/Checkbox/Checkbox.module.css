@@ -1,0 +1,14 @@
+.grid_checkbox_icon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  position: relative;
+  flex: 0 0 18px;
+  box-sizing: border-box;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+}
+
+.root {
+  padding: 6px;
+}
