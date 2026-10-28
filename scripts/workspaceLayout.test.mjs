@@ -7,8 +7,8 @@ import {
   MAX_WORKSPACE_TABS,
 } from "../src/workspace/workspaceModel.ts";
 import {
-  canDropInLoanRow,
-  canSplitLoanRow,
+  readLoanLayout,
+  saveLoanLayout,
   defaultLoanRows,
 } from "../src/pages/loanReturn/loanLayout.ts";
 
@@ -35,35 +35,59 @@ test("default loan rows match the reference and each reset gets an independent l
   assert.equal(defaultLoanRows().lists[0].includes("interlibrary"), true);
   assert.equal(defaultLoanRows().activity.length, 2);
 });
-test("each row accepts a third section but rejects a fourth while tabs remain available", () => {
-  assert.equal(canSplitLoanRow(2), true);
-  assert.equal(canSplitLoanRow(3), false);
-  assert.equal(canSplitLoanRow(4), false);
-  assert.equal(canDropInLoanRow("right", 2), true);
-  assert.equal(canDropInLoanRow("left", 3), false);
-  assert.equal(canDropInLoanRow("center", 3), true);
-});
-test("moving an existing whole section at the limit stays allowed, splitting a tab does not", () => {
-  assert.equal(canDropInLoanRow("right", 3, true), true);
-  assert.equal(canDropInLoanRow("left", 3, true), true);
-  assert.equal(canDropInLoanRow("right", 3, false), false);
-});
-test("vertical drops cannot create extra rows or stacked sections", () => {
-  for (const position of ["top", "bottom", "unknown"]) {
-    assert.equal(canDropInLoanRow(position, 1), false);
-    assert.equal(canDropInLoanRow(position, 3, true), false);
-  }
-});
 
-test("tab headers accept reordering and cross-row tab joins even at the section limit", () => {
-  for (const kind of ["tab", "header_space"])
-    for (const position of ["left", "right", "center"])
-      assert.equal(canDropInLoanRow(position, 3, false, kind), true);
-});
-
-test("a section leaving another row does not free space in the target row", () => {
-  assert.equal(canDropInLoanRow("right", 3, false, "content"), false);
-  assert.equal(canDropInLoanRow("right", 2, false, "content"), true);
-  assert.equal(canDropInLoanRow("center", 3, false, "content"), true);
-  assert.equal(canDropInLoanRow("center", 0, false, "content"), true);
+test("free docking saves nested splits, empty layouts and independent snapshots", () => {
+  const layout = {
+    grid: {
+      width: 1000,
+      height: 300,
+      orientation: "HORIZONTAL",
+      root: {
+        type: "branch",
+        data: [
+          {
+            type: "branch",
+            size: 500,
+            data: [
+              {
+                type: "leaf",
+                size: 150,
+                data: { id: "top", views: ["loans"], activeView: "loans" },
+              },
+              {
+                type: "leaf",
+                size: 150,
+                data: { id: "bottom", views: ["processed"], activeView: "processed" },
+              },
+            ],
+          },
+          {
+            type: "leaf",
+            size: 500,
+            data: { id: "side", views: ["reservations"], activeView: "reservations" },
+          },
+        ],
+      },
+    },
+    panels: {
+      loans: { id: "loans" },
+      processed: { id: "processed" },
+      reservations: { id: "reservations" },
+    },
+    activeGroup: "side",
+  };
+  const snapshot = { version: 3, height: "long", layout };
+  saveLoanLayout(snapshot);
+  assert.deepEqual(readLoanLayout(), snapshot);
+  layout.grid.root.data.pop();
+  assert.equal(readLoanLayout().layout.grid.root.data.length, 2);
+  const loaded = readLoanLayout();
+  loaded.layout.panels.loans.id = "changed";
+  assert.equal(readLoanLayout().layout.panels.loans.id, "loans");
+  saveLoanLayout({
+    version: 3,
+    height: "normal",
+    layout: { ...layout, panels: {}, grid: { ...layout.grid, root: { type: "branch", data: [] } } },
+  });
+  assert.deepEqual(readLoanLayout().layout.grid.root.data, []);
 });

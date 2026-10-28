@@ -34,24 +34,22 @@
 }
 .layout {
   display: grid;
-  grid-template-rows: 256px minmax(128px, 1fr) minmax(128px, 1fr);
+  grid-template-rows: 256px minmax(264px, 1fr);
   gap: 8px;
   height: 100%;
-  /* Base row, two usable list rows, and the gaps between them. */
+  /* Keep the default two-level docking layout usable in a short workspace. */
   min-height: 528px;
   min-width: 0;
 }
 .height_long .layout {
-  grid-template-rows: 256px minmax(128px, 1.3fr) minmax(128px, 1fr);
+  grid-template-rows: 256px minmax(384px, 1fr);
+  min-height: 648px;
 }
 .height_extra .layout {
-  grid-template-rows: 256px minmax(128px, 1fr) minmax(128px, 1.3fr);
+  grid-template-rows: 256px minmax(512px, 1fr);
+  min-height: 776px;
 }
-.layout[data-visible-rows="1"] {
-  grid-template-rows: 256px minmax(128px, 1fr);
-  min-height: 392px;
-}
-.layout[data-visible-rows="0"] {
+.layout[data-empty="true"] {
   grid-template-rows: 256px;
   min-height: 256px;
 }

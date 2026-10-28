@@ -1,6 +1,5 @@
 import type { SerializedDockview } from "dockview";
 
-export const MAX_LOAN_ROW_SECTIONS = 3;
 export type LoanHeight = "normal" | "long" | "extra";
 export type LoanRowId = "lists" | "activity";
 export type LoanPanelId =
@@ -37,26 +36,10 @@ export function defaultLoanRows(): Record<LoanRowId, LoanPanelId[][]> {
   };
 }
 
-export function canSplitLoanRow(groupCount: number, releasesSourceGroup = false): boolean {
-  return groupCount - (releasesSourceGroup ? 1 : 0) < MAX_LOAN_ROW_SECTIONS;
-}
-
-export function canDropInLoanRow(
-  position: string,
-  groupCount: number,
-  releasesSourceGroup = false,
-  kind: string = "content",
-): boolean {
-  if (kind === "tab" || kind === "header_space") return true;
-  if (position === "center") return true;
-  if (position !== "left" && position !== "right") return false;
-  return canSplitLoanRow(groupCount, releasesSourceGroup);
-}
-
 export type LoanLayoutSnapshot = {
-  version: 2;
+  version: 3;
   height: LoanHeight;
-  rows: Record<LoanRowId, SerializedDockview>;
+  layout: SerializedDockview;
 };
 let savedLayout: LoanLayoutSnapshot | undefined;
 
